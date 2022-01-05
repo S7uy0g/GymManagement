@@ -87,7 +87,7 @@ int main()
 			   scanf("%d",&dataM[1].time[1].day);
 			   if(dataM[1].time[1].day>31)
 			     {
-			     	printf("Wrong Entry!!");
+			     	printf("Wrong Entry!!!");
 			     	printf("\n");
 			     	goto daywrong;
 			     }
