@@ -77,7 +77,7 @@ int main()
 			   scanf("%d",&dataM[1].time[1].month);
 			   if(dataM[1].time[1].month>12)
 			     {
-			     	printf("Wrong Entry!!");
+			     	printf("Wrong Entry!!!!");
 			     	printf("\n");
 			     	goto monthwrong;
 				 }
