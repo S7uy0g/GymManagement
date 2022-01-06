@@ -100,16 +100,16 @@ int main()
 			     	goto daywrong;
 			     } 
 			   fwrite(&dataM,sizeof(dataM),1,fp1);
-			   char YN;
+			   char YNmember;
 			   YNwrong:
 			   printf("Do you want to add another member(input Y/N):");
-			   scanf("%s",&YN);
+			   scanf("%s",&YNmember);
 			   fflush(stdin);
-			   if(YN=='Y'||YN=='y')
+			   if(YNmember=='Y'||YNmember=='y')
 			     {
 			     	goto add;
 				   }
-			   else if(YN=='N'||YN=='n')
+			   else if(YNmember=='N'||YNmember=='n')
 			      {
 			      	break;
 					   }
@@ -169,7 +169,25 @@ int main()
 			           printf("\nMembership starting date:");
 			           printf("\nYear:%d",dataM.time.year);
 			           printf("\nMonth:%d",dataM.time.month);
-			           printf("\nDay:%d",dataM.time.day); 	
+			           printf("\nDay:%d",dataM.time.day); 
+			           char YNmodify;
+					   printf("\nDo you want to modify this data(Y/N):")	
+					   scanf("%s",&YNmodify);
+			           fflush(stdin);
+			           YNwrong2:
+			           if(YNmodify=='Y'||YNmodify=='y')
+			              {
+			            	printf("To be added");
+				          }
+			           else if(YNmodify=='N'||YNmodify=='n')
+			             {
+			               break;
+					     }
+					   else
+					     {
+					     	printf("Wrong Entry!!!");
+					     	goto YNwrong2;
+					     } 			
 					}
 			     }
 			   break;
