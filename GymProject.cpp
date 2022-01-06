@@ -60,12 +60,9 @@ int main()
 			   printf("Name:");
 			   gets(dataM.name);
 			   fflush(stdin);
-			   int i=0;
-			   printf("Id no. taken upto %d",i);
 			   printf("Id:");
 			   scanf("%d",&dataM.id);
 			   fflush(stdin); 
-			   i++;
 			   printf("Age:");
 			   scanf("%d",&dataM.age);
 			   fflush(stdin);
