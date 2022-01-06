@@ -27,7 +27,7 @@ int main()
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
-   	  fp1=fopen("E:\\GymProject.txt","w");
+   	  fp1=fopen("E:\\GymProject.txt","rb+");
    	  if(fp1==NULL)
    	     {
    	     	printf("File not opened!!!");
@@ -40,28 +40,32 @@ int main()
    	  	printf("\n");
    	  	printf("\n1.Add Members");
    	  	printf("\n2.List Members");
-   	  	printf("\n3.Trainer Information");
-   	  	printf("\n4.Equipement Information");
-   	  	printf("\n5.Exit");
+   	  	printf("\n3.Find Members");
+   	  	printf("\n4.Trainer Information");
+   	  	printf("\n5.Equipement Information");
+   	  	printf("\n6.Exit");
    	  	printf("\n");
    	  	flag:
    	  	printf("\nPlaease enter your choice down bellow");
    	  	printf("\nChoice:");
    	  	scanf("%d",&choice);
-   	  switch(choice)
+   	  	fflush(stdin);
+   	    switch(choice)
    	    {
    	    	case 1:
    	    	 {
-			   add:
-			   fseek(fp1,0, SEEK_END);	 	
+			   add: 	
    	    	   printf("Add Member details down bellow:");
 			   printf("\n");
 			   printf("Name:");
 			   gets(dataM.name);
 			   fflush(stdin);
+			   int i=0;
+			   printf("Id no. taken upto %d",i);
 			   printf("Id:");
 			   scanf("%d",&dataM.id);
-			   fflush(stdin);   
+			   fflush(stdin); 
+			   i++;
 			   printf("Age:");
 			   scanf("%d",&dataM.age);
 			   fflush(stdin);
@@ -70,35 +74,37 @@ int main()
 			   fflush(stdin);
 			   printf("Weight(in kg):");
 			   scanf("%d",&dataM.weight);
+			   fflush(stdin);
 			   printf("Membership starting date:");
 			   printf("\nYear:");
 			   scanf("%d",&dataM.time.year);
+			   fflush(stdin);
 			   monthwrong:
 			   printf("Month:");
 			   scanf("%d",&dataM.time.month);
-			   if(dataM.time.month>12)
+			   fflush(stdin);
+			   if(dataM.time.month>12||dataM.time.month<1)
 			     {
 			     	printf("Wrong Entry!!!!");
 			     	printf("\n");
 			     	goto monthwrong;
-				 }
-			   fflush(stdin);	 
+				 }	 
 			   daywrong: 
 			   printf("Day:");
 			   scanf("%d",&dataM.time.day);
-			   if(dataM.time.day>31)
+			   fflush(stdin);
+			   if(dataM.time.day>31||dataM.time.day<1)
 			     {
 			     	printf("Wrong Entry!!");
 			     	printf("\n");
 			     	goto daywrong;
-			     }
-			   fflush(stdin);  
+			     } 
 			   fwrite(&dataM,sizeof(dataM),1,fp1);
-			   fclose(fp1);
 			   char YN;
 			   YNwrong:
 			   printf("Do you want to add another member(input Y/N):");
 			   scanf("%s",&YN);
+			   fflush(stdin);
 			   if(YN=='Y'||YN=='y')
 			     {
 			     	goto add;
@@ -111,19 +117,21 @@ int main()
 				  {
 				  	 printf("Wrong Entry!!");
 				  	 goto YNwrong;
-							  }	        
+							  }			  	        
    	    	   break;
    	         }
    	    	case 2:
    	    	 {
-   	    	   fp1=fopen("E:\\GymProject.txt","r");
    	    	   printf("\n");
    	    	   printf("List of all members:");
    	    	   printf("\n");
    	    	   rewind (fp1);
-	           while(fread(&dataM,sizeof(dataM),1,fp1)==0)
+	           while(fread(&dataM,sizeof(dataM),1,fp1)>0)
 	             { 
-	                 printf("\nId:%d",dataM.id);
+	                 printf("\n");
+	                 printf("\nName:");
+	                 puts(dataM.name);
+	                 printf("Id:%d",dataM.id);
 			         printf("\nAge:%d",dataM.age);
 			         printf("\nHeight(in foot):%d",dataM.height);
 			         printf("\nWeight(in kg:)%d",dataM.weight);
