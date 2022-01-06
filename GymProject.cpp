@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 struct membership_time
   {
   	int year,month,day;
@@ -35,7 +36,8 @@ int main()
    	     	exit(0);
 	   	 }
 	  while(1)
-	   {    
+	   { 
+	    printf("\n");   
    	  	printf("\nGym Managemnet");
    	  	printf("\n");
    	  	printf("\n1.Add Members");
@@ -60,6 +62,7 @@ int main()
 			   printf("Name:");
 			   gets(dataM.name);
 			   fflush(stdin);
+			   int i=0;
 			   printf("Id:");
 			   scanf("%d",&dataM.id);
 			   fflush(stdin); 
@@ -141,7 +144,34 @@ int main()
 		     }
 			case 3:
 			 {	
-			   printf("To be added2");
+			   char member_name[20];
+			   int member_id;
+			   printf("\n");
+			   printf("Enter Name and ID down bellow");
+			   printf("\nName:");
+			   gets(member_name);
+			   fflush(stdin);
+			   printf("ID:");
+			   scanf("%d",&member_id);
+			   fflush(stdin);
+			   rewind(fp1);
+			   while(fread(&dataM,sizeof(dataM),1,fp1)>0)
+			     {
+			      if(strcmp(member_name,dataM.name)==0 && member_id==dataM.id)
+			        {
+			           printf("\n");
+	                   printf("\nName:");
+	                   puts(dataM.name);
+	                   printf("Id:%d",dataM.id);
+			           printf("\nAge:%d",dataM.age);
+			           printf("\nHeight(in foot):%d",dataM.height);
+			           printf("\nWeight(in kg:)%d",dataM.weight);
+			           printf("\nMembership starting date:");
+			           printf("\nYear:%d",dataM.time.year);
+			           printf("\nMonth:%d",dataM.time.month);
+			           printf("\nDay:%d",dataM.time.day); 	
+					}
+			     }
 			   break;
 		     }
 			case 4:
@@ -149,7 +179,11 @@ int main()
 			   printf("To be added3");
 			   break;
 		     }
-			case 5:
+		    case 5:
+			 {
+			 	printf("To be added4");
+			 } 
+			case 6:
 			 {	
 			   exit(0);	
 			   break;
