@@ -20,8 +20,7 @@ struct equipment_info
   {
   	char equip[20];
   	int numbers;
-  };  
-void membership(int);   
+  };     
 int main()
    {
    	  int choice;
