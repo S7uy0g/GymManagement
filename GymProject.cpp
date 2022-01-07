@@ -32,7 +32,7 @@ int main()
    	  if(fp1==NULL)
    	     {
    	     	printf("File not opened!!!");
-   	     	return 0;
+   	     	return 0
    	     	exit(0);
 	   	 }
 	  while(1)
