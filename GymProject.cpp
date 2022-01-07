@@ -29,7 +29,7 @@ int main()
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
-   	  fp1=fopen("C:\\BITproject.txt","rb+");
+   	  fp1=fopen("E:\\BITproject.txt","wb+");
    	  if(fp1==NULL)
    	     {
    	     	printf("File not opened!!!");
@@ -114,7 +114,24 @@ int main()
 			      	printf("This plan doesnot exists!!");
 			      	goto membershipwrong;
 					}  
-               membership(choicemembership);	
+  	           int temptime=0,endyear=0,endmonth=0,tempmonth=0,originalmonth=dataM.time.month;
+	           printf("\nMembership ending date:");
+	           temptime=originalmonth+choicemembership;
+	           if(temptime>12)
+		         {
+	    	        tempmonth=temptime-12;
+		            endyear=dataM.time.year+1;
+			        endmonth=temptime-tempmonth;
+			        printf("\nYear:%d",endyear);
+			        printf("\nMonth:%d",endmonth);
+			        printf("\nDay:%d",dataM.time.day);
+		         }
+	           else
+		         {
+			        printf("\nYear:%d",dataM.time.year);
+			        printf("\nMonth:%d",dataM.time.month+choicemembership);
+			        printf("\nDay:%d",dataM.time.day);
+		         }             
 			   fwrite(&dataM,sizeof(dataM),1,fp1);
 			   char YNmember;
 			   YNwrong:
@@ -232,25 +249,4 @@ int main()
      }
    	  return 0;
    }
-void membership(int membermonth)
-  {
-  	struct member_info dataM;
-  	int temptime=0,endyear=0,endmonth=0,tempmonth=0,originalmonth=dataM.time.month;
-	printf("\nMembership ending date:");
-	temptime=originalmonth+membermonth;
-	if(temptime>12)
-		{
-	    	tempmonth=temptime-12;
-		    endyear=dataM.time.year+1;
-			endmonth=temptime-tempmonth;
-			printf("\nYear:%d",endyear);
-			printf("\nMonth:%d",endmonth);
-			printf("\nDay:%d",dataM.time.day);
-		}
-	else
-		{
-			printf("\nYear:%d",dataM.time.year);
-			printf("\nMonth:%d",dataM.time.month+membermonth);
-			printf("\nDay:%d",dataM.time.day);
-		}    
-	 }   
+  
