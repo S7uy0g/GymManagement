@@ -20,7 +20,8 @@ struct equipment_info
   {
   	char equip[20];
   	int numbers;
-  };   
+  };  
+void membership(int);   
 int main()
    {
    	  int choice;
@@ -28,11 +29,11 @@ int main()
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
-   	  fp1=fopen("E:\\GymProject.txt","rb+");
+   	  fp1=fopen("C:\\BITproject.txt","rb+");
    	  if(fp1==NULL)
    	     {
    	     	printf("File not opened!!!");
-   	     	return 0
+   	     	return 0;
    	     	exit(0);
 	   	 }
 	  while(1)
@@ -98,7 +99,22 @@ int main()
 			     	printf("Wrong Entry!!");
 			     	printf("\n");
 			     	goto daywrong;
-			     } 
+			     }
+			   int choicemembership;
+			   membershipwrong:	  
+			   printf("Choose a membership plan:");
+			   printf("\n3months");
+			   printf("\n6months");
+			   printf("\n9months");
+			   printf("\n12months");
+			   printf("\nEnter the membership plan(months):");
+			   scanf("%d",&choicemembership);
+			   if(choicemembership>12)
+			      {
+			      	printf("This plan doesnot exists!!");
+			      	goto membershipwrong;
+					}  
+               membership(choicemembership);	
 			   fwrite(&dataM,sizeof(dataM),1,fp1);
 			   char YNmember;
 			   YNwrong:
@@ -138,7 +154,7 @@ int main()
 			         printf("\nMembership starting date:");
 			         printf("\nYear:%d",dataM.time.year);
 			         printf("\nMonth:%d",dataM.time.month);
-			         printf("\nDay:%d",dataM.time.day);
+			         printf("\nDay:%d",dataM.time.day); 
 	             } 
 			   break;
 		     }
@@ -170,8 +186,10 @@ int main()
 			           printf("\nYear:%d",dataM.time.year);
 			           printf("\nMonth:%d",dataM.time.month);
 			           printf("\nDay:%d",dataM.time.day); 
+			           printf("\nMembership ending date:");
+			           
 			           char YNmodify;
-					   printf("\nDo you want to modify this data(Y/N):")	
+					   printf("\nDo you want to modify this data(Y/N):");	
 					   scanf("%s",&YNmodify);
 			           fflush(stdin);
 			           YNwrong2:
@@ -214,3 +232,25 @@ int main()
      }
    	  return 0;
    }
+void membership(int membermonth)
+  {
+  	struct member_info dataM;
+  	int temptime=0,endyear=0,endmonth=0,tempmonth=0,originalmonth=dataM.time.month;
+	printf("\nMembership ending date:");
+	temptime=originalmonth+membermonth;
+	if(temptime>12)
+		{
+	    	tempmonth=temptime-12;
+		    endyear=dataM.time.year+1;
+			endmonth=temptime-tempmonth;
+			printf("\nYear:%d",endyear);
+			printf("\nMonth:%d",endmonth);
+			printf("\nDay:%d",dataM.time.day);
+		}
+	else
+		{
+			printf("\nYear:%d",dataM.time.year);
+			printf("\nMonth:%d",dataM.time.month+membermonth);
+			printf("\nDay:%d",dataM.time.day);
+		}    
+	 }   
