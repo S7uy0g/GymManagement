@@ -5,12 +5,18 @@ struct membership_time
   {
   	int year,month,day;
   };
+struct time
+  {
+  	int shour,smin,ehour,emin;
+  };   
 struct member_info
   {
   	char name[25];
   	int id,age,height,weight;
   	struct membership_time time;
-  };
+  	char workchoice[10];
+  	struct time tm;
+  }; 
 struct trainer_info
   {
   	char name[25];
@@ -24,7 +30,7 @@ struct equipment_info
 int main()
    {
    	  int choice,choicemembership;
-	  long int recsize;  	
+	  long int recsize,recsize2,recsize3;  	
    	  FILE *fp1;
    	  struct member_info dataM;
    	  struct trainer_info dataT;
@@ -32,11 +38,17 @@ int main()
    	  fp1=fopen("E:\\BITproject.txt","rb+");
    	  if(fp1==NULL)
    	     {
-   	     	printf("File not opened!!!");
-   	     	return 0;
-   	     	exit(0);
+   	     	fp1=fopen("E:\\BITproject.txt","wb+");
+   	     	if(fp1==NULL)
+   	     	{
+   	     	    printf("File not opened!!!");
+   	     	    return 0;
+   	     	    exit(0);
+   	        }
 	   	 }
-	  recsize=sizeof(dataM); 	 
+	  recsize=sizeof(dataM); 
+	  recsize2=sizeof(dataT);
+	  recsize3=sizeof(dataE); 
 	  while(1)
 	   { 
 	    printf("\n");   
@@ -54,8 +66,9 @@ int main()
    	  	printf("\nChoice:");
    	  	scanf("%d",&choice);
    	  	fflush(stdin);
+   	  	system("cls");
    	    switch(choice)
-   	    {
+   	      {
    	    	case 1:
    	    	 {
 			   add: 	
@@ -110,9 +123,9 @@ int main()
 			   scanf("%d",&choicemembership);
 			   if(choicemembership==3||choicemembership==6||choicemembership==9||choicemembership==12)
 			   { 
-  	           int temptime=0,endyear=0,tempmonth=0,originalmonth=dataM.time.month;
+  	           int temptime=0,endyear=0,tempmonth=0;
 	           printf("\nMembership ending date:");
-	           temptime=originalmonth+choicemembership;
+	           temptime=dataM.time.month+choicemembership;
 	           if(temptime>12)
 		         {
 	    	        tempmonth=temptime-12;
@@ -139,6 +152,7 @@ int main()
 			   printf("\nDo you want to add another member(input Y/N):");
 			   scanf("%s",&YNmember);
 			   fflush(stdin);
+			   system("cls");
 			   if(YNmember=='Y'||YNmember=='y')
 			     {
 			     	goto add;
@@ -156,12 +170,14 @@ int main()
    	         }
    	    	case 2:
    	    	 {
+   	    	   int anynumber;
    	    	   printf("\n");
    	    	   printf("List of all members:");
    	    	   printf("\n");
    	    	   rewind (fp1);
 	           while(fread(&dataM,recsize,1,fp1)>0)
 	             { 
+	                 int temptime=0,endyear=0,endmonth=0,tempmonth=0;
 	                 printf("\n");
 	                 printf("\nName:");
 	                 puts(dataM.name);
@@ -173,9 +189,8 @@ int main()
 			         printf("\nYear:%d",dataM.time.year);
 			         printf("\nMonth:%d",dataM.time.month);
 			         printf("\nDay:%d",dataM.time.day); 
-			         int temptime=0,endyear=0,endmonth=0,tempmonth=0,originalmonth=dataM.time.month;
 	                 printf("\nMembership ending date:");
-	                 temptime=originalmonth+choicemembership;
+	                 temptime=dataM.time.month+choicemembership;
 	                 if(temptime>12)
 		              {
 	    	             tempmonth=temptime-12;
@@ -191,6 +206,9 @@ int main()
 			             printf("\nDay:%d",dataM.time.day);
 		              }             
 	             } 
+			   printf("\nPress any key to continue.");  
+	           getchar();
+			   system("cls"); 
 			   break;
 		     }
 			case 3:
@@ -221,9 +239,9 @@ int main()
 			           printf("\nYear:%d",dataM.time.year);
 			           printf("\nMonth:%d",dataM.time.month);
 			           printf("\nDay:%d",dataM.time.day); 
-			           int temptime=0,endyear=0,tempmonth=0,originalmonth=dataM.time.month;
+			           int temptime=0,endyear=0,tempmonth=0;
 	                   printf("\nMembership ending date:");
-	                   temptime=originalmonth+choicemembership;
+	                   temptime=dataM.time.month+choicemembership;
 	                   if(temptime>12)
 		                 {
 	    	                tempmonth=temptime-12;
@@ -237,14 +255,24 @@ int main()
 			                printf("\nYear:%d",dataM.time.year);
 			                printf("\nMonth:%d",dataM.time.month+choicemembership);
 			                printf("\nDay:%d",dataM.time.day);
-		                 }             
-			           char YNmodify;
-					   printf("\nDo you want to modify this data(Y/N):");	
-					   scanf("%s",&YNmodify);
-			           fflush(stdin);
-			           YNwrong2:
-			           if(YNmodify=='Y'||YNmodify=='y')
-			              {
+		                 }
+					   printf("\nWorkout details");
+					   printf("\nWorkout Time");
+			           printf("\nStarting time:%02d:%02d",dataM.tm.shour,dataM.tm.smin);
+			           printf("\nEnding time:%02d:%02d",dataM.tm.ehour,dataM.tm.emin);
+			           printf("\nWorkout focus:");
+			           puts(dataM.workchoice);
+			           int datachoice;
+			           datachoicewrong:
+			           printf("\nWhat do you want to do with this data:");
+			           printf("\n1.Modify");
+			           printf("\n2.Input today's workout details");
+			           printf("\nEnter your choice:");
+			           scanf("%d",&datachoice);
+			           switch(datachoice)
+			             {
+			             	case 1:
+			             	  {
 			              	     printf("\n");
 			            	     printf("Enter the new information for this data:");
 			            	     printf("Name:");
@@ -296,25 +324,25 @@ int main()
 			                     scanf("%d",&choicemembership);
 			                     if(choicemembership!=3||choicemembership!=6||choicemembership!=9||choicemembership!=12)
 			                       { 
-  	                             int temptime=0,endyear=0,tempmonth=0,originalmonth=dataM.time.month;
-	                             printf("\nMembership ending date:");
-	                             temptime=originalmonth+choicemembership;
-	                             if(temptime>12)
-		                           {
-	    	                          tempmonth=temptime-12;
-		                              endyear=dataM.time.year+1;
-			                          printf("\nYear:%d",endyear);
-			                          printf("\nMonth:%d",tempmonth);
-			                          printf("\nDay:%d",dataM.time.day);
-		                            }
-	                              else
-		                            {
-			                          printf("\nYear:%d",dataM.time.year);
-			                          printf("\nMonth:%d",dataM.time.month+choicemembership);
-			                          printf("\nDay:%d",dataM.time.day);
-		                            }
-								  }
-								  else
+  	                                  int temptime=0,endyear=0,tempmonth=0,originalmonth=dataM.time.month;
+	                                  printf("\nMembership ending date:");
+	                                  temptime=originalmonth+choicemembership;
+	                                  if(temptime>12)
+		                                {
+	    	                               tempmonth=temptime-12;
+		                                   endyear=dataM.time.year+1;
+			                               printf("\nYear:%d",endyear);
+			                               printf("\nMonth:%d",tempmonth);
+			                               printf("\nDay:%d",dataM.time.day);
+		                                }
+	                                  else
+		                                {
+			                               printf("\nYear:%d",dataM.time.year);
+			                               printf("\nMonth:%d",dataM.time.month+choicemembership);
+			                               printf("\nDay:%d",dataM.time.day);
+		                                }
+								   }
+								 else
 								    {
 								      printf("This plan doesnot exists!!");
 			      	                  goto membershipwrong2;
@@ -322,20 +350,40 @@ int main()
 								  fseek(fp1,-recsize,SEEK_CUR);	            
 			                      fwrite(&dataM,recsize,1,fp1);
 			                      break;
-				          }
-			           else if(YNmodify=='N'||YNmodify=='n')
+				            }
+			            case 2:
 			             {
+			               printf("Enter today's workout details:");	
+			               printf("\nWorkout Time(00:00)");
+			               printf("\nStarting time:");
+			               scanf("%02d:%02d",&dataM.tm.shour,&dataM.tm.smin);
+			               fflush(stdin);
+			               printf("Ending time:");
+			               scanf("%02d:%02d",&dataM.tm.ehour,&dataM.tm.emin);
+			               fflush(stdin);
+			               printf("\nWorkout type:");
+			               printf("\nChest");
+			               printf("\nLegs");
+			               printf("\nFull Body");
+			               printf("\nAbs");
+			               printf("\nArms");
+			               printf("\nBack");
+			               printf("\nEnter your workout focus:");
+			               gets(dataM.workchoice);
+			               fflush(stdin);
+						   fseek(fp1,recsize,SEEK_CUR);	 	
+			               fwrite(&dataM,recsize,1,fp1);
 			               break;
 					     }
-					   else
-					     {
-					     	printf("Wrong Entry!!!");
-					     	goto YNwrong2;
-					     } 			
-					}
-			     }
-			   break;
+					    default:
+					    printf("Wrong Entry!!!");
+					    goto datachoicewrong;
+					    break;		
+				   }
 		     }
+		     }
+		     break;
+		    }
 			case 4:
 			 {	
 			   printf("To be added3");
@@ -344,6 +392,7 @@ int main()
 		    case 5:
 			 {
 			 	printf("To be added4");
+			 	break;
 			 } 
 			case 6:
 			 {	
@@ -355,7 +404,6 @@ int main()
 			goto flag;
 			break;	
 	    }
-     }
+     } 
    	  return 0;
    }
-  
