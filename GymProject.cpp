@@ -12,7 +12,7 @@ struct time
 struct member_info
   {
   	char name[25];
-  	int id,age,height,weight;
+  	int id,age,height,weight,choicemembership;
   	struct membership_time time;
   	char workchoice[10];
   	struct time tm;
@@ -120,26 +120,10 @@ int main()
 			   printf("\n9months");
 			   printf("\n12months");
 			   printf("\nEnter the membership plan(months):");
-			   scanf("%d",&choicemembership);
-			   if(choicemembership==3||choicemembership==6||choicemembership==9||choicemembership==12)
+			   scanf("%d",&dataM.choicemembership);
+			   if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			   { 
-  	           int temptime=0,endyear=0,tempmonth=0;
-	           printf("\nMembership ending date:");
-	           temptime=dataM.time.month+choicemembership;
-	           if(temptime>12)
-		         {
-	    	        tempmonth=temptime-12;
-		            endyear=dataM.time.year+1;
-			        printf("\nYear:%d",endyear);
-			        printf("\nMonth:%d",tempmonth);
-			        printf("\nDay:%d",dataM.time.day);
-		         }
-	           else
-		         {
-			        printf("\nYear:%d",dataM.time.year);
-			        printf("\nMonth:%d",dataM.time.month+choicemembership);
-			        printf("\nDay:%d",dataM.time.day);
-		         }
+	              printf("\nYour package will end after %dmonths prior to this date.",dataM.choicemembership);
 			   }
 			   else
 			   {
@@ -189,22 +173,7 @@ int main()
 			         printf("\nYear:%d",dataM.time.year);
 			         printf("\nMonth:%d",dataM.time.month);
 			         printf("\nDay:%d",dataM.time.day); 
-	                 printf("\nMembership ending date:");
-	                 temptime=dataM.time.month+choicemembership;
-	                 if(temptime>12)
-		              {
-	    	             tempmonth=temptime-12;
-		                 endyear=dataM.time.year+1;
-			             printf("\nYear:%d",endyear);
-			             printf("\nMonth:%d",tempmonth);
-			             printf("\nDay:%d",dataM.time.day);
-		              }
-	                 else
-		              {
-			             printf("\nYear:%d",dataM.time.year);
-			             printf("\nMonth:%d",dataM.time.month+choicemembership);
-			             printf("\nDay:%d",dataM.time.day);
-		              }             
+	                 printf("\nYour package will end after %dmonths prior to this date.",dataM.choicemembership);           
 	             } 
 			   printf("\nPress any key to continue.");  
 	           getchar();
@@ -239,36 +208,16 @@ int main()
 			           printf("\nYear:%d",dataM.time.year);
 			           printf("\nMonth:%d",dataM.time.month);
 			           printf("\nDay:%d",dataM.time.day); 
-			           int temptime=0,endyear=0,tempmonth=0;
-	                   printf("\nMembership ending date:");
-	                   temptime=dataM.time.month+choicemembership;
-	                   if(temptime>12)
-		                 {
-	    	                tempmonth=temptime-12;
-		                    endyear=dataM.time.year+1;
-			                printf("\nYear:%d",endyear);
-			                printf("\nMonth:%d",tempmonth);
-			                printf("\nDay:%d",dataM.time.day);
-		                 }
-	                   else
-		                 {
-			                printf("\nYear:%d",dataM.time.year);
-			                printf("\nMonth:%d",dataM.time.month+choicemembership);
-			                printf("\nDay:%d",dataM.time.day);
-		                 }
-					   printf("\nWorkout details");
-					   printf("\nWorkout Time");
-			           printf("\nStarting time:%02d:%02d",dataM.tm.shour,dataM.tm.smin);
-			           printf("\nEnding time:%02d:%02d",dataM.tm.ehour,dataM.tm.emin);
-			           printf("\nWorkout focus:");
-			           puts(dataM.workchoice);
+			           printf("\nMembership will end after %d months prior to this date");
 			           int datachoice;
 			           datachoicewrong:
 			           printf("\nWhat do you want to do with this data:");
 			           printf("\n1.Modify");
 			           printf("\n2.Input today's workout details");
+			           printf("\n3.Show workout sheet");
 			           printf("\nEnter your choice:");
 			           scanf("%d",&datachoice);
+			           fflush(stdin);
 			           switch(datachoice)
 			             {
 			             	case 1:
@@ -321,26 +270,10 @@ int main()
 			                     printf("\n9months");
 			                     printf("\n12months");
 			                     printf("\nEnter the membership plan(months):");
-			                     scanf("%d",&choicemembership);
-			                     if(choicemembership!=3||choicemembership!=6||choicemembership!=9||choicemembership!=12)
+			                     scanf("%d",&dataM.choicemembership);
+			                     if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			                       { 
-  	                                  int temptime=0,endyear=0,tempmonth=0,originalmonth=dataM.time.month;
-	                                  printf("\nMembership ending date:");
-	                                  temptime=originalmonth+choicemembership;
-	                                  if(temptime>12)
-		                                {
-	    	                               tempmonth=temptime-12;
-		                                   endyear=dataM.time.year+1;
-			                               printf("\nYear:%d",endyear);
-			                               printf("\nMonth:%d",tempmonth);
-			                               printf("\nDay:%d",dataM.time.day);
-		                                }
-	                                  else
-		                                {
-			                               printf("\nYear:%d",dataM.time.year);
-			                               printf("\nMonth:%d",dataM.time.month+choicemembership);
-			                               printf("\nDay:%d",dataM.time.day);
-		                                }
+  	                                  printf("Membership will end after %d months prior to this date.",dataM.choicemembership);
 								   }
 								 else
 								    {
