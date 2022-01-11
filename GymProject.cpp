@@ -20,7 +20,7 @@ struct member_info
 struct trainer_info
   {
   	char name[25];
-  	int id,age,salary,time;
+  	int id,age,salary,stime,etime;
   };   
 struct equipment_info
   {
@@ -31,7 +31,7 @@ int main()
    {
    	  int choice,choicemembership;
 	  long int recsize,recsize2,recsize3;  	
-   	  FILE *fp1;
+   	  FILE *fp1,*fp2,*ft1,*ft2;
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
@@ -46,11 +46,19 @@ int main()
    	     	    exit(0);
    	        }
 	   	 }
+	  fp2=fopen("E:\\TrainerInfo.txt","wb+");
+	  if(fp2==NULL)
+	     {
+	     	printf("File2 not opened!!!");
+	     	return 0;
+	     	exit(0);
+	     } 	 
 	  recsize=sizeof(dataM); 
 	  recsize2=sizeof(dataT);
 	  recsize3=sizeof(dataE); 
 	  while(1)
 	   { 
+	    top:
 	    printf("\n");   
    	  	printf("\nGym Managemnet");
    	  	printf("\n");
@@ -182,9 +190,10 @@ int main()
 		     }
 			case 3:
 			 {	
-			   char member_name[20];
+			   char member_name[20],re;
 			   int member_id;
 			   printf("\n");
+			   refind:
 			   printf("Enter Name and ID down bellow");
 			   printf("\nName:");
 			   gets(member_name);
@@ -208,118 +217,306 @@ int main()
 			           printf("\nYear:%d",dataM.time.year);
 			           printf("\nMonth:%d",dataM.time.month);
 			           printf("\nDay:%d",dataM.time.day); 
-			           printf("\nMembership will end after %d months prior to this date");
-			           int datachoice;
+			           printf("\nMembership will end after %d months prior to this date",dataM.choicemembership);
+			           char datachoice;
 			           datachoicewrong:
-			           printf("\nWhat do you want to do with this data:");
-			           printf("\n1.Modify");
-			           printf("\n2.Input today's workout details");
-			           printf("\n3.Show workout sheet");
-			           printf("\nEnter your choice:");
-			           scanf("%d",&datachoice);
+			           printf("Edit the data?(Y/N)");
+			           scanf("%s",&datachoice);
 			           fflush(stdin);
-			           switch(datachoice)
-			             {
-			             	case 1:
-			             	  {
-			              	     printf("\n");
-			            	     printf("Enter the new information for this data:");
-			            	     printf("Name:");
-			            	     gets(dataM.name);
-			            	     fflush(stdin);
-			            	     printf("ID:");
- 			                     scanf("%d",&dataM.id);
-			                     fflush(stdin); 
-			                     printf("Age:");
-			                     scanf("%d",&dataM.age);
-			                     fflush(stdin);
-			                     printf("Height(in foot):");
-			                     scanf("%d",&dataM.height);
-			                     fflush(stdin);
-			                     printf("Weight(in kg):");
-			                     scanf("%d",&dataM.weight);
-			                     fflush(stdin);
-			                     printf("Membership starting date:");
-			                     printf("\nYear:");
-			                     scanf("%d",&dataM.time.year);
-			                     fflush(stdin);
-			                     monthwrong2:
-			                     printf("Month:");
-			                     scanf("%d",&dataM.time.month);
-			                     fflush(stdin);
-			                     if(dataM.time.month>12||dataM.time.month<1)
+			           if(datachoice=='Y'||datachoice=='y')
+			           {
+			           	   printf("\n");
+			                printf("Enter the new information for this data:");
+			                printf("Name:");
+			                gets(dataM.name);
+			      	        fflush(stdin);
+			                printf("ID:");
+ 	                        scanf("%d",&dataM.id);
+			                fflush(stdin); 
+	                        printf("Age:");
+		                    scanf("%d",&dataM.age);
+			                fflush(stdin);
+                            printf("Height(in foot):");
+			                scanf("%d",&dataM.height);
+			                fflush(stdin);
+			                printf("Weight(in kg):");
+			                scanf("%d",&dataM.weight);
+			                fflush(stdin);
+	                        printf("Membership starting date:");
+	                        printf("\nYear:");
+			                scanf("%d",&dataM.time.year);
+			                fflush(stdin);
+			                monthwrong2:
+	                        printf("Month:");
+    	                    scanf("%d",&dataM.time.month);
+			                fflush(stdin);
+			                if(dataM.time.month>12||dataM.time.month<1)
 			                        {
 			     	                  printf("Wrong Entry!!!!");
 			     	                  printf("\n");
 			     	                  goto monthwrong2;
 				                    }	 
-			                     daywrong2: 
-			                     printf("Day:");
-			                     scanf("%d",&dataM.time.day);
-			                     fflush(stdin);
-			                     if(dataM.time.day>31||dataM.time.day<1)
+			                daywrong2: 
+	                        printf("Day:");
+			                scanf("%d",&dataM.time.day);
+			                fflush(stdin);
+			                if(dataM.time.day>31||dataM.time.day<1)
 			                       {
 			     	                  printf("Wrong Entry!!");
 			                       	  printf("\n");
 			     	                  goto daywrong2;
 			                        }
-			                     membershipwrong2:	  
-			                     printf("Choose a membership plan:");
-			                     printf("\n3months");
-			                     printf("\n6months");
-			                     printf("\n9months");
-			                     printf("\n12months");
-			                     printf("\nEnter the membership plan(months):");
-			                     scanf("%d",&dataM.choicemembership);
-			                     if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
+			                membershipwrong2:	  
+	                        printf("Choose a membership plan:");
+			                printf("\n3months");
+			                printf("\n6months");
+			                printf("\n9months");
+			                printf("\n12months");
+	                        printf("\nEnter the membership plan(months):");
+    	                    scanf("%d",&dataM.choicemembership);
+			                if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			                       { 
   	                                  printf("Membership will end after %d months prior to this date.",dataM.choicemembership);
 								   }
-								 else
+			   			    else
 								    {
 								      printf("This plan doesnot exists!!");
 			      	                  goto membershipwrong2;
 									}
-								  fseek(fp1,-recsize,SEEK_CUR);	            
-			                      fwrite(&dataM,recsize,1,fp1);
-			                      break;
-				            }
-			            case 2:
-			             {
-			               printf("Enter today's workout details:");	
-			               printf("\nWorkout Time(00:00)");
-			               printf("\nStarting time:");
-			               scanf("%02d:%02d",&dataM.tm.shour,&dataM.tm.smin);
-			               fflush(stdin);
-			               printf("Ending time:");
-			               scanf("%02d:%02d",&dataM.tm.ehour,&dataM.tm.emin);
-			               fflush(stdin);
-			               printf("\nWorkout type:");
-			               printf("\nChest");
-			               printf("\nLegs");
-			               printf("\nFull Body");
-			               printf("\nAbs");
-			               printf("\nArms");
-			               printf("\nBack");
-			               printf("\nEnter your workout focus:");
-			               gets(dataM.workchoice);
-			               fflush(stdin);
-						   fseek(fp1,recsize,SEEK_CUR);	 	
-			               fwrite(&dataM,recsize,1,fp1);
-			               break;
-					     }
-					    default:
-					    printf("Wrong Entry!!!");
-					    goto datachoicewrong;
-					    break;		
+					  	    fseek(fp1,-recsize,SEEK_CUR);	            
+			                fwrite(&dataM,recsize,1,fp1);
+			                printf("\nPress R to find other data");
+			                scanf("%s",&re);
+			                fflush(stdin);
+			                if(re=='R'||re=='r')
+			                  {
+			                  	goto refind;
+							  }
+							else 
+			                break;
+			           }
+			           else if(datachoice=='N'||datachoice=='n')
+					   {
+					   	  printf("\nPress R to find other data");
+			              scanf("%s",&re);
+			              fflush(stdin);
+			              if(re=='R'||re=='r')
+			                  {
+			                  	goto refind;
+							  }
+						  else 
+					   	  printf("Press any key to continue");
+					   	  getchar();
+					   	  break;
+					   } 
+					   else
+					   break;   
 				   }
-		     }
-		     }
+			    }
 		     break;
 		    }
 			case 4:
 			 {	
-			   printf("To be added3");
+			   int choicetrainer;
+			   while(1)
+			   {
+			   	   Tchoicewrong:
+			   	   printf("\n");
+			       printf("1.Add Trainer");
+			       printf("\n2.Find a Trainer");
+			       printf("\n3.List Trainers");
+			       printf("\n4.Exit");
+			       printf("\nEnter your choice.");
+			       scanf("%d",&choicetrainer);
+			       fflush(stdin);
+			       system("cls");
+			       switch(choicetrainer)
+			         {
+			         	case 1:
+			         		{
+			         			addtrainer:
+			         			printf("\n");
+			         			printf("Enter Trainer Details:");
+			         			printf("\nName:");
+			         			gets(dataT.name);
+			         			fflush(stdin);
+			         			printf("Id:");
+			         			scanf("%d",&dataT.id);
+			         			fflush(stdin);
+			         			printf("\nAge:");
+			         			scanf("%d",&dataT.age);
+			         			fflush(stdin);
+			         			printf("\nSalary(Rs.):");
+			         			scanf("%d",&dataT.salary);
+			         			fflush(stdin);
+			         			printf("Working hours:");
+			         			printf("\nStarting time:");
+			         			scanf("%d",&dataT.stime);
+			         			fflush(stdin);
+			         			printf("Ending time:");
+			         			scanf("%d",&dataT.etime);
+			         			fflush(stdin);
+			         			fwrite(&dataT,recsize2,1,fp2);
+			         			char YNtrainer;
+			                    YNtrainerwrong:
+			                    printf("\nDo you want to add another member(input Y/N):");
+			                    scanf("%s",&YNtrainer);
+			                    fflush(stdin);
+			                    system("cls");
+			                    if(YNtrainer=='Y'||YNtrainer=='y')
+			                       {
+			                        	goto add;
+				                    }
+			                    else if(YNtrainer=='N'||YNtrainer=='n')
+			                       {
+			      	                   break;
+					               }
+				                else
+				                   {
+				  	                  printf("Wrong Entry!!");
+				  	                  printf("Press any key to continue.");
+				  	                  getchar();
+				  	                  system("cls");
+				  	                  goto YNtrainerwrong;
+							       }		
+							}
+						case 2:
+							{
+								char tname[20];
+								int tid;
+								ft2=fopen("E:\\temp1.txt","wb+");
+								if(ft2==NULL)
+								  {
+								  	printf("Temp File not opened!!");
+								  	return 0;
+								  	exit(0);
+								  }
+								printf("\nEnter Trainer information:");
+								printf("\nName:");
+								gets(tname);
+								fflush(stdin);
+								printf("\nID:");
+								scanf("%d",&tid);
+								fflush(stdin);
+								rewind(fp1);
+								while(fread(&dataT,recsize2,1,fp2)>0)
+								  {
+								  	if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
+								  	  {
+								  	  		printf("\nName:");
+			         			            puts(dataT.name);
+			         			            printf("Id:%d",&dataT.id);
+			         		   	            printf("\nAge:%d",&dataT.age);
+			         			            printf("\nSalary(Rs.):%d",&dataT.salary);
+			         			            printf("\nWorking hours(24hrs format):");
+			         			            printf("\nStarting time:%d",&dataT.stime);
+			         			            printf("Ending time:%d",&dataT.etime);
+								  	  }
+								  	int tdatachoice;    
+								  	printf("\nWhat do you want to do with this data:");
+								  	tdatawrong:
+									printf("\n1.Modify");
+									printf("\n2.Delete");
+									printf("\n3.Exit");
+									printf("\nEnter your choice:");
+									scanf("%d",&tdatachoice);
+									fflush(stdin);
+									system("cls");
+									switch(tdatachoice)
+									  {
+									  	case 1:
+									  		{
+									  			if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
+									  			  {
+									  			  	printf("\nEnter new details:");
+									  			  	printf("\nName:");
+			         			                    gets(dataT.name);
+			         			                    fflush(stdin);
+			         			                    printf("Id:");
+			         			                    scanf("%d",&dataT.id);
+			         			                    fflush(stdin);
+			         			                    printf("\nAge:");
+			         			                    scanf("%d",&dataT.age);
+			         			                    fflush(stdin);
+			         			                    printf("\nSalary(Rs.):");
+			         			                    scanf("%d",&dataT.salary);
+			         			                    fflush(stdin);
+			         			                    printf("Working hours:");
+			         			                    printf("\nStarting time:");
+			         			                    scanf("%d",&dataT.stime);
+			         			                    fflush(stdin);
+			         			                    printf("Ending time:");
+			         			                    scanf("%d",&dataT.etime);
+			         			                    fflush(stdin);
+			         			                    fseek(fp2,-recsize2,SEEK_CUR);
+			         			                    fwrite(&dataT,recsize2,1,fp2);
+												  }
+												break;  
+										    }
+										case 2:
+										    {
+										    	if(strcmp(dataT.name,tname)!=0&&tid!=dataT.id)
+										    	  {
+										    	  	fwrite(&dataT,recsize2,1,ft2);
+												  }
+												fclose(ft2);
+												fclose(fp2);
+												remove("TrainerInfo.txt");
+												rename("temp1.txt","TrainerInfo.txt");
+												fp2=fopen("E:\\TrainerInfo.txt","wb+");
+	                                            if(fp2==NULL)
+	                                             {
+	     	                                        printf("File2 not opened!!!");
+	     	                                        return 0;
+	     	                                        exit(0);
+	                                             }
+												break;  	
+										    }
+										case 3:
+										    {
+										    	goto top;
+											}
+										default:
+										printf("Wrong Entry!!");
+										goto tdatawrong;
+										system("cls");		    
+									  }    
+								  } 
+								break;
+							}
+						case 3:
+							{
+								printf("\nList of all Trainers");
+								printf("\n");
+   	    	                    rewind (fp2);
+	                            while(fread(&dataT,recsize2,1,fp2)>0)
+	                                { 
+	                                  
+	                                  printf("\n");
+	                                  printf("\nName:");
+			        		          puts(dataT.name);
+			         	              printf("Id:%d",&dataT.id);
+			         		   	      printf("\nAge:%d",&dataT.age);
+			        		          printf("\nSalary(Rs.):%d",&dataT.salary);
+			         	              printf("\nWorking hours(24hrs format):");
+			         			      printf("\nStarting time:%d",&dataT.stime);
+			         			      printf("Ending time:%d",&dataT.etime);
+	                                } 
+			                    printf("\nPress any key to continue.");  
+	                            getchar();
+			                    system("cls"); 
+								break;
+							}
+						case 4:
+							{
+								break;
+							}	
+						default:
+						printf("Wrong choice!!");
+						goto Tchoicewrong;
+						break;	
+					 }
+			   }
 			   break;
 		     }
 		    case 5:
