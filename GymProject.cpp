@@ -24,14 +24,14 @@ struct trainer_info
   };   
 struct equipment_info
   {
-  	char equip[20];
-  	int numbers;
+  	char equip[30];
+  	int numbers,kg;
   };   
 int main()
    {
    	  int choice,choicemembership;
-	  long int recsize,recsize2,recsize3;  	
-   	  FILE *fp1,*fp2,*ft1,*ft2;
+	  long int recsize,recsize2,recsize3,tempsize1;  	
+   	  FILE *fp1,*fp2,*fp3,*ft1,*ft2,*ft3;
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
@@ -52,10 +52,18 @@ int main()
 	     	printf("File2 not opened!!!");
 	     	return 0;
 	     	exit(0);
-	     } 	 
+	     } 	
+	  fp3=fopen("E:\\EquipmentInfo.txt","rb+");
+	  if(fp3==NULL)
+	     {
+	     	printf("File3 not opened!!!");
+	     	return 0;
+	     	exit(0);
+	     }   
 	  recsize=sizeof(dataM); 
 	  recsize2=sizeof(dataT);
 	  recsize3=sizeof(dataE); 
+	  tempsize1=sizeof(dataE.numbers);
 	  while(1)
 	   { 
 	    top:
@@ -65,9 +73,10 @@ int main()
    	  	printf("\n1.Add Members");
    	  	printf("\n2.List Members");
    	  	printf("\n3.Find Members");
-   	  	printf("\n4.Trainer Information");
-   	  	printf("\n5.Equipement Information");
-   	  	printf("\n6.Exit");
+   	  	printf("\n4.Workout Sheet");
+   	  	printf("\n5.Trainer Information");
+   	  	printf("\n6.Equipement Information");
+   	  	printf("\n7.Exit");
    	  	printf("\n");
    	  	flag:
    	  	printf("\nPlaease enter your choice down bellow");
@@ -315,7 +324,12 @@ int main()
 			    }
 		     break;
 		    }
-			case 4:
+		    case 4:
+		      {
+		      	printf("To be added");
+		      	break;
+			  }
+			case 5:
 			 {	
 			   int choicetrainer;
 			   while(1)
@@ -509,6 +523,9 @@ int main()
 							}
 						case 4:
 							{
+								printf("Press any key to continue.");
+								getchar();
+								system("cls");
 								break;
 							}	
 						default:
@@ -516,15 +533,233 @@ int main()
 						goto Tchoicewrong;
 						break;	
 					 }
+				break;	 
 			   }
 			   break;
 		     }
-		    case 5:
+		    case 6:
 			 {
-			 	printf("To be added4");
-			 	break;
+			 	int equipchoice;
+			 	while(1)
+			 	{
+			 	printf("\n");	
+			 	printf("Equipment Management");
+			 	printf("\n");
+			 	printf("\n1.Add Equipment");
+			 	printf("\n2.List all Equipments");
+			 	printf("\n3.Find Equipment");
+			 	printf("\n4.Exit");
+			 	printf("\nEnter your choice:");
+			 	scanf("%d",&equipchoice);
+			 	fflush(stdin);
+			 	system("cls");
+			 	switch(equipchoice)
+			 	   {
+			 	   	  case 1:
+			 	   	  	{
+			 	   	  		addequip:
+			 	   	  		printf("\nAdd equipment information");
+			 	   	  		printf("\n");
+			 	   	  		printf("\nEquipment name:");
+			 	   	  		gets(dataE.equip);
+			 	   	  		fflush(stdin);
+			 	   	  		if(strcmp(dataE.equip,"Dumbbell")==0||strcmp(dataE.equip,"Barbell")==0)
+			 	   	  		  {
+			 	   	  		  	printf("\nWeight(kg):");
+			 	   	  		  	scanf("%d",&dataE.kg);
+			 	   	  		  	fflush(stdin);
+							  }
+							printf("\nNo. of ");
+							puts(dataE.equip);
+							scanf("%d",&dataE.numbers);
+							fflush(stdin);
+							fwrite(&dataE,recsize3,1,fp3);
+			         	    char YNequipment;
+			                YNequipwrong:
+			                printf("\nDo you want to add another equipment(input Y/N):");
+			                scanf("%s",&YNequipment);
+			                fflush(stdin);
+			                system("cls");
+			                if(YNequipment=='Y'||YNequipment=='y')
+			                    {
+			                      	goto addequip;
+				                }
+			               else if(YNequipment=='N'||YNequipment=='n')
+			                    {
+		      	                   break;
+   			                    }
+				            else
+				                {
+				  	              printf("Wrong Entry!!");
+				                  printf("Press any key to continue.");
+			 	                  getchar();
+			  	                  system("cls");
+			  	                  goto YNequipwrong;
+						       }		
+							break;  
+				 	    }
+				 	  case 2:
+					   {
+					   	    printf("\n");
+					   	    printf("List of all equipments");
+					   	    printf("\n");
+   	    	                rewind (fp3);
+	                        while(fread(&dataE,recsize3,1,fp3)>0)
+	                          {
+	                          	printf("\nEquipemnt name:");
+	                          	puts(dataE.equip);
+	                          	if(strcmp(dataE.equip,"Dumbbell")==0||strcmp(dataE.equip,"Barbell")==0)
+	                          	  {
+	                          	  	printf("Kg:%d",dataE.kg);
+								  }
+								printf("Total no:%d",dataE.numbers);  
+							  }
+					   	    break;
+					   }
+					  case 3:
+					   {
+					   	  ft3=fopen("E:\\temp2.txt","wb+");
+				  		  if(ft3==NULL)
+							  {
+							  	printf("Temp File not opened!!");
+							  	return 0;
+							  	exit(0);
+							  }
+					   	  char tequip[30];
+					   	  int tweight,aequip;
+					   	  printf("\n");
+					   	  printf("Enter Equipment information");
+					   	  printf("\nEquipment name:");
+					   	  gets(tequip);
+					   	  fflush(stdin);
+					   	  if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
+					   	    {
+					   	    	printf("Weight(kg):");
+					   	    	scanf("%d",&tweight);
+					   	    	fflush(stdin);
+						    }
+						  system("cls");  
+						  rewind(fp3);
+			              while(fread(&dataE,recsize3,1,fp3)>0)
+						    {
+						    	if(strcmp(dataE.equip,tequip)==0)
+						    	  {
+						    	  	if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
+					   	               {
+					   	               	   	printf("\nEquipment name:");
+						    	  	        puts(dataE.equip);
+						    	  	        printf("Weight(kg):%d",dataE.kg);
+						    	  	        printf("\nTotal no:%d",dataE.numbers);
+						               }
+						            else
+									   {
+									   	    printf("\nEquipment name:");
+						    	  	        puts(dataE.equip);
+						    	  	        printf("Total no:%d",dataE.numbers);
+									   }   
+								  }
+								int edatachoice;
+								MRwrong:
+								printf("\nWhat do you want to do with this data");
+								printf("\n1.Modify");
+								printf("\n2.Remove");
+								printf("\n3.Exit");
+								printf("\nEnter your choice:");
+								scanf("%d",&edatachoice);
+								fflush(stdin);
+								system("cls");
+								switch(edatachoice)
+								  {
+								  	 case 1:
+								  	 	{
+								  	 		char AR,a,r;
+								  	 		ARwrong:
+								  	 		printf("Add or Remove no. of ");
+								  	 		puts(dataE.equip);
+								  	 	    printf("\nPress (A to add/R to remove):");
+								  	 	    scanf("%s",&AR);
+								  	 	    if(AR=='a'||AR=='A')
+								  	 	      {
+								  	 	      	printf("Add(in no.):");
+								  	 	      	scanf("%d",&a);
+								  	 	      	fflush(stdin);
+								  	 	      	dataE.numbers=dataE.numbers+a;
+								  	 	      	fseek(fp3,-tempsize1,SEEK_CUR);
+								  	 	      	fwrite(&dataE,tempsize1,1,fp3);
+											  }
+											else if(AR=='r'||AR=='R')
+								  	 	      {
+								  	 	      	printf("Add(in no.):");
+								  	 	      	scanf("%d",&a);
+								  	 	      	fflush(stdin);
+								  	 	      	dataE.numbers=dataE.numbers-a;
+								  	 	      	fseek(fp3,-tempsize1,SEEK_CUR);
+								  	 	      	fwrite(&dataE,tempsize1,1,fp3);
+											  }  
+								  	 		break;
+									    }
+									  case 2:
+									    {
+									        if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
+										    	{
+										    	  	if(strcmp(dataE.equip,tequip)!=0&&tweight!=dataE.kg)
+													  {
+													  	fwrite(&dataE,recsize3,1,ft2);
+													  }  	
+											    }
+											else
+											   {
+											   	    if(strcmp(dataE.equip,tequip)!=0)
+											   	      {
+											   	      	fwrite(&dataE,recsize3,1,ft3);
+													  }
+											   }    
+											fclose(ft3);
+											fclose(fp3);
+											remove("EquipmentInfo.txt");
+											rename("temp2.txt","EquipmentInfo.txt");
+											fp3=fopen("E:\\TrainerInfo.txt","wb+");
+	                                        if(fp3==NULL)
+	                                            {
+	     	                                        printf("File3 not opened!!!");
+	     	                                        return 0;
+	     	                                        exit(0);
+	                                            }
+	                                        break ;   
+									    }  
+									  case 3:
+									    {
+									    	printf("Press any key to continue..");
+								            getchar();
+								            system("cls");
+								            break;
+									    }
+									  default:
+									  printf("Wrong choice!!");
+									  printf("Press any key to continue..");
+									  getchar();
+									  goto MRwrong;
+									  break;	   
+								  }  
+								break;      
+							} 
+						  break;	
+					   }
+					  case 4:
+					   {
+					   	  printf("Press any key to continue..");
+					      getchar();
+			              system("cls");
+	 		              break;
+					   }
+					  default:
+					  break;     
+				   }
+				  break; 
+			    }
+			   break; 
 			 } 
-			case 6:
+			case 7:
 			 {	
 			   exit(0);	
 			   break;
