@@ -46,19 +46,27 @@ int main()
    	     	    exit(0);
    	        }
 	   	 }
-	  fp2=fopen("E:\\TrainerInfo.txt","wb+");
+	  fp2=fopen("E:\\TrainerInfo.txt","rb+");
 	  if(fp2==NULL)
 	     {
-	     	printf("File2 not opened!!!");
-	     	return 0;
-	     	exit(0);
+	     	fp2=fopen("E:\\TrainerInfo.txt","wb+");
+   	     	if(fp1==NULL)
+   	     	 {
+   	     	 	printf("File2 not opened!!!");
+	     	    return 0;
+	     	    exit(0);
+			 }
 	     } 	
 	  fp3=fopen("E:\\EquipmentInfo.txt","rb+");
 	  if(fp3==NULL)
 	     {
-	     	printf("File3 not opened!!!");
-	     	return 0;
-	     	exit(0);
+	     	fp3=fopen("E:\\EquipmentInfo.txt","wb+");
+	        if(fp3==NULL)
+	         {
+	     	   printf("File3 not opened!!!");
+	     	   return 0;
+	     	   exit(0);
+	         }
 	     }   
 	  recsize=sizeof(dataM); 
 	  recsize2=sizeof(dataT);
@@ -161,12 +169,15 @@ int main()
 			   else if(YNmember=='N'||YNmember=='n')
 			      {
 			      	break;
-					   }
+			      }
 				else
 				  {
 				  	 printf("Wrong Entry!!");
 				  	 goto YNwrong;
-							  }			  	        
+				  }
+			   printf("Press any key to continue");
+			   getchar();
+			   system("cls");  			  	        
    	    	   break;
    	         }
    	    	case 2:
@@ -199,8 +210,19 @@ int main()
 		     }
 			case 3:
 			 {	
-			   char member_name[20],re;
+			   char member_name[20],membermodify;
 			   int member_id;
+			   ft1=fopen("E:\\temp1.txt","rb+");
+			   if(ft1==NULL)
+			   	   {
+			   	   	  ft1=fopen("E:\\temp1.txt","wb+");
+			          if(ft1==NULL)
+			            {
+			            	printf("Temp1 File not opened!!");
+						    return 0;
+					  	    exit(0);
+					    }
+				   }
 			   printf("\n");
 			   refind:
 			   printf("Enter Name and ID down bellow");
@@ -210,120 +232,165 @@ int main()
 			   printf("ID:");
 			   scanf("%d",&member_id);
 			   fflush(stdin);
-			   rewind(fp1);
-			   while(fread(&dataM,recsize,1,fp1)>0)
-			     {
-			      if(strcmp(member_name,dataM.name)==0 && member_id==dataM.id)
-			        {
-			           printf("\n");
-	                   printf("\nName:");
-	                   puts(dataM.name);
-	                   printf("Id:%d",dataM.id);
-			           printf("\nAge:%d",dataM.age);
-			           printf("\nHeight(in foot):%d",dataM.height);
-			           printf("\nWeight(in kg:)%d",dataM.weight);
-			           printf("\nMembership starting date:");
-			           printf("\nYear:%d",dataM.time.year);
-			           printf("\nMonth:%d",dataM.time.month);
-			           printf("\nDay:%d",dataM.time.day); 
-			           printf("\nMembership will end after %d months prior to this date",dataM.choicemembership);
-			           char datachoice;
-			           datachoicewrong:
-			           printf("Edit the data?(Y/N)");
-			           scanf("%s",&datachoice);
-			           fflush(stdin);
-			           if(datachoice=='Y'||datachoice=='y')
-			           {
-			           	   printf("\n");
-			                printf("Enter the new information for this data:");
-			                printf("Name:");
-			                gets(dataM.name);
-			      	        fflush(stdin);
-			                printf("ID:");
- 	                        scanf("%d",&dataM.id);
-			                fflush(stdin); 
-	                        printf("Age:");
-		                    scanf("%d",&dataM.age);
-			                fflush(stdin);
-                            printf("Height(in foot):");
-			                scanf("%d",&dataM.height);
-			                fflush(stdin);
-			                printf("Weight(in kg):");
-			                scanf("%d",&dataM.weight);
-			                fflush(stdin);
-	                        printf("Membership starting date:");
-	                        printf("\nYear:");
-			                scanf("%d",&dataM.time.year);
-			                fflush(stdin);
-			                monthwrong2:
-	                        printf("Month:");
-    	                    scanf("%d",&dataM.time.month);
-			                fflush(stdin);
-			                if(dataM.time.month>12||dataM.time.month<1)
-			                        {
-			     	                  printf("Wrong Entry!!!!");
-			     	                  printf("\n");
-			     	                  goto monthwrong2;
-				                    }	 
-			                daywrong2: 
-	                        printf("Day:");
-			                scanf("%d",&dataM.time.day);
-			                fflush(stdin);
-			                if(dataM.time.day>31||dataM.time.day<1)
-			                       {
-			     	                  printf("Wrong Entry!!");
-			                       	  printf("\n");
-			     	                  goto daywrong2;
-			                        }
-			                membershipwrong2:	  
-	                        printf("Choose a membership plan:");
-			                printf("\n3months");
-			                printf("\n6months");
-			                printf("\n9months");
-			                printf("\n12months");
-	                        printf("\nEnter the membership plan(months):");
-    	                    scanf("%d",&dataM.choicemembership);
-			                if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
-			                       { 
-  	                                  printf("Membership will end after %d months prior to this date.",dataM.choicemembership);
-								   }
-			   			    else
+			   int datachoice;
+			   printf("\nWhat do you want to do with this data:");
+			   datachoicewrong:
+			   printf("\n1Show");
+	           printf("\n2.Modify");
+			   printf("\n3.Delete");
+		       printf("\n4.Exit");
+	           printf("\nInput your choice:");
+	           scanf("%d",&datachoice);
+		       fflush(stdin);
+		       system("cls"); 
+		       switch(datachoice)
+			       {
+			       	  case 1:
+			       	  	{
+			       	  		rewind(fp1);
+			       	  		while(fread(&dataM,recsize,1,fp1)>0)
+	                           { 
+	                             if(strcmp(dataM.name,member_name)==0&&dataM.id==member_id)
+	                                {
+	                                	printf("\n");
+	                                    printf("\nName:");
+	                                    puts(dataM.name);
+	                                    printf("Id:%d",dataM.id);
+			                            printf("\nAge:%d",dataM.age);
+			                            printf("\nHeight(in foot):%d",dataM.height);
+			                            printf("\nWeight(in kg:)%d",dataM.weight);
+			                            printf("\nMembership starting date:");
+			                            printf("\nYear:%d",dataM.time.year);
+			                            printf("\nMonth:%d",dataM.time.month);
+			                            printf("\nDay:%d",dataM.time.day); 
+	                                    printf("\nYour package will end after %d months prior to this date.",dataM.choicemembership);   
+								    }
+								 else
 								    {
-								      printf("This plan doesnot exists!!");
-			      	                  goto membershipwrong2;
+								    	printf("Invalid Data!!");
+								    	goto refind;
+								    }  
+	                           } 
+			       	  		break;
+					    }
+					  case 2:
+					    {
+					    	rewind(fp1);
+			       	  		while(fread(&dataM,recsize,1,fp1)>0)
+			       	  		   {
+			       	  		   	  if(strcmp(dataM.name,member_name)==0&&dataM.id==member_id)
+			       	  		   	    {
+			       	  		   	    	 printf("\nModify details down bellow:");
+			                             printf("\n");
+			                             printf("Name:");
+			                             gets(dataM.name);
+			                             fflush(stdin);
+			                             printf("Id:");
+			                             scanf("%d",&dataM.id);
+			                             fflush(stdin); 
+			                             printf("Age:");
+			                             scanf("%d",&dataM.age);
+			                             fflush(stdin);
+			                             printf("Height(in foot):");
+			                             scanf("%d",&dataM.height);
+			                             fflush(stdin);
+			                             printf("Weight(in kg):");
+			                             scanf("%d",&dataM.weight);
+			                             fflush(stdin);
+			                             printf("Membership starting date:");
+			                             printf("\nYear:");
+			                             scanf("%d",&dataM.time.year);
+			                             fflush(stdin);
+			                             monthwrong2:
+			                             printf("Month:");
+			                             scanf("%d",&dataM.time.month);
+			                             fflush(stdin);
+			                             if(dataM.time.month>12||dataM.time.month<1)
+			                                {
+			     	                            printf("Wrong Entry!!!!");
+			     	                            printf("\n");
+			     	                            goto monthwrong2;
+				                            }	 
+			                             daywrong2: 
+			                             printf("Day:");
+			                             scanf("%d",&dataM.time.day);
+			                             fflush(stdin);
+			                             if(dataM.time.day>31||dataM.time.day<1)
+			                                {
+			     	                            printf("Wrong Entry!!");
+			     	                            printf("\n");
+			     	                            goto daywrong2;
+			                                }
+			                             membershipwrong2:	  
+			                             printf("Choose a membership plan:");
+			                             printf("\n3months");
+			                             printf("\n6months");
+			                             printf("\n9months");
+			                             printf("\n12months");
+			                             printf("\nEnter the membership plan(months):");
+			                             scanf("%d",&dataM.choicemembership);
+			                             if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
+			                                {  
+	                                            printf("\nYour package will end after %dmonths prior to this date.",dataM.choicemembership);
+			                                }
+			                             else
+			                                {
+			   	                                printf("This package doesnot exist!!");
+			   	                                goto membershipwrong;
+			                                }
+			                             fseek(fp1,-recsize,SEEK_CUR);  
+			                             fwrite(&dataM,recsize,1,fp1);
 									}
-					  	    fseek(fp1,-recsize,SEEK_CUR);	            
-			                fwrite(&dataM,recsize,1,fp1);
-			                printf("\nPress R to find other data");
-			                scanf("%s",&re);
-			                fflush(stdin);
-			                if(re=='R'||re=='r')
-			                  {
-			                  	goto refind;
-							  }
-							else 
-			                break;
-			           }
-			           else if(datachoice=='N'||datachoice=='n')
-					   {
-					   	  printf("\nPress R to find other data");
-			              scanf("%s",&re);
-			              fflush(stdin);
-			              if(re=='R'||re=='r')
-			                  {
-			                  	goto refind;
-							  }
-						  else 
-					   	  printf("Press any key to continue");
-					   	  getchar();
-					   	  break;
-					   } 
-					   else
-					   break;   
+			       	  		   	  break;
+							   }
+					    	break;
+					    }
+					  case 3:
+					    {
+					    	rewind(fp1);
+			       	  		while(fread(&dataM,recsize,1,fp1)>0)
+			       	  		   {
+			       	  		   	  if(strcmp(dataM.name,member_name)!=0&&dataM.id!=member_id)
+									 {
+							    	  	fwrite(&dataM,recsize,1,ft1);
+								     }
+								  fclose(ft1);
+								  fclose(fp1);
+								  remove("BITproject.txt");
+				 				  rename("temp1.txt","BITproject.txt");
+								  fp1=fopen("E:\\BITproject.txt","rb+");
+	                              if(fp1==NULL)
+	                                 {
+	                                    fp1=fopen("E:\\TrainerInfo.txt","wb+");
+	                                    if(fp1==NULL)
+	                                        {          
+	                                            printf("File1.1 not opened!!!");
+	     	                                    return 0;
+	     	                                    exit(0);
+												  
+										   }
+	                                 }
+							   }
+							printf("Press any key to continue..");
+							getchar();
+							system("cls");   
+					    	break;
+					    }
+					  case 4:
+					    {
+					    	printf("Press any key to continue..");
+							getchar();
+							system("cls"); 
+					    	break;
+					    }
+					  default:	
+					  printf("Wrong choice!!");
+					  goto datachoicewrong;
+					  system("cls");
+					  break;				  
 				   }
-			    }
-		     break;
-		    }
+		 	   break;  
+			  }	
 		    case 4:
 		      {
 		      	printf("To be added");
@@ -379,7 +446,7 @@ int main()
 			                    system("cls");
 			                    if(YNtrainer=='Y'||YNtrainer=='y')
 			                       {
-			                        	goto add;
+			                        	goto addtrainer;
 				                    }
 			                    else if(YNtrainer=='N'||YNtrainer=='n')
 			                       {
@@ -398,12 +465,16 @@ int main()
 							{
 								char tname[20];
 								int tid;
-								ft2=fopen("E:\\temp1.txt","wb+");
+								ft2=fopen("E:\\temp1.txt","rb+");
 								if(ft2==NULL)
 								  {
-								  	printf("Temp File not opened!!");
-								  	return 0;
-								  	exit(0);
+								    ft2=fopen("E:\\temp1.txt","wb+");
+								    if(ft2==NULL)
+									  {
+									  	 printf("Temp File not opened!!");
+								  	     return 0;
+								  	     exit(0);
+									  }	
 								  }
 								printf("\nEnter Trainer information:");
 								printf("\nName:");
@@ -419,12 +490,12 @@ int main()
 								  	  {
 								  	  		printf("\nName:");
 			         			            puts(dataT.name);
-			         			            printf("Id:%d",&dataT.id);
-			         		   	            printf("\nAge:%d",&dataT.age);
-			         			            printf("\nSalary(Rs.):%d",&dataT.salary);
+			         			            printf("Id:%d",dataT.id);
+			         		   	            printf("\nAge:%d",dataT.age);
+			         			            printf("\nSalary(Rs.):%d",dataT.salary);
 			         			            printf("\nWorking hours(24hrs format):");
-			         			            printf("\nStarting time:%d",&dataT.stime);
-			         			            printf("Ending time:%d",&dataT.etime);
+			         			            printf("\nStarting time:%d",dataT.stime);
+			         			            printf("Ending time:%d",dataT.etime);
 								  	  }
 								  	int tdatachoice;    
 								  	printf("\nWhat do you want to do with this data:");
@@ -477,12 +548,16 @@ int main()
 												fclose(fp2);
 												remove("TrainerInfo.txt");
 												rename("temp1.txt","TrainerInfo.txt");
-												fp2=fopen("E:\\TrainerInfo.txt","wb+");
+												fp2=fopen("E:\\TrainerInfo.txt","rb+");
 	                                            if(fp2==NULL)
 	                                             {
-	     	                                        printf("File2 not opened!!!");
-	     	                                        return 0;
-	     	                                        exit(0);
+	                                             	fp2=fopen("E:\\TrainerInfo.txt","wb+");
+	                                                if(fp2==NULL)
+	                                                   {
+	                                                   	 printf("File2 not opened!!!");
+	     	                                             return 0;
+	     	                                             exit(0);
+													   }
 	                                             }
 												break;  	
 										    }
@@ -509,12 +584,12 @@ int main()
 	                                  printf("\n");
 	                                  printf("\nName:");
 			        		          puts(dataT.name);
-			         	              printf("Id:%d",&dataT.id);
-			         		   	      printf("\nAge:%d",&dataT.age);
-			        		          printf("\nSalary(Rs.):%d",&dataT.salary);
+			         	              printf("Id:%d",dataT.id);
+			         		   	      printf("\nAge:%d",dataT.age);
+			        		          printf("\nSalary(Rs.):%d",dataT.salary);
 			         	              printf("\nWorking hours(24hrs format):");
-			         			      printf("\nStarting time:%d",&dataT.stime);
-			         			      printf("Ending time:%d",&dataT.etime);
+			         			      printf("\nStarting time:%d",dataT.stime);
+			         			      printf("Ending time:%d",dataT.etime);
 	                                } 
 			                    printf("\nPress any key to continue.");  
 	                            getchar();
@@ -618,12 +693,16 @@ int main()
 					   }
 					  case 3:
 					   {
-					   	  ft3=fopen("E:\\temp2.txt","wb+");
+					   	  ft3=fopen("E:\\temp2.txt","rb+");
 				  		  if(ft3==NULL)
 							  {
-							  	printf("Temp File not opened!!");
-							  	return 0;
-							  	exit(0);
+							  	ft3=fopen("E:\\temp2.txt","wb+");
+				  		        if(ft3==NULL)
+				  		          {
+				  		          	 printf("Temp File not opened!!");
+							  	     return 0;
+							   	     exit(0);
+								  }
 							  }
 					   	  char tequip[30];
 					   	  int tweight,aequip;
@@ -704,7 +783,7 @@ int main()
 										    	{
 										    	  	if(strcmp(dataE.equip,tequip)!=0&&tweight!=dataE.kg)
 													  {
-													  	fwrite(&dataE,recsize3,1,ft2);
+													  	fwrite(&dataE,recsize3,1,ft3);
 													  }  	
 											    }
 											else
@@ -718,12 +797,16 @@ int main()
 											fclose(fp3);
 											remove("EquipmentInfo.txt");
 											rename("temp2.txt","EquipmentInfo.txt");
-											fp3=fopen("E:\\TrainerInfo.txt","wb+");
+											fp3=fopen("E:\\TrainerInfo.txt","rb+");
 	                                        if(fp3==NULL)
 	                                            {
-	     	                                        printf("File3 not opened!!!");
-	     	                                        return 0;
-	     	                                        exit(0);
+	                                            	fp3=fopen("E:\\TrainerInfo.txt","rb+");
+	                                                if(fp3==NULL)
+	                                                  {
+	                                                  	printf("File3 not opened!!!");
+	     	                                            return 0;
+	     	                                            exit(0);
+													  }
 	                                            }
 	                                        break ;   
 									    }  
