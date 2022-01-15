@@ -212,10 +212,10 @@ int main()
 			 {	
 			   char member_name[20],membermodify;
 			   int member_id;
-			   ft1=fopen("E:\\temp1.txt","rb+");
+			   ft1=fopen("E:\\temp1.txt","wb+");
 			   if(ft1==NULL)
 			   	   {
-			   	   	  ft1=fopen("E:\\temp1.txt","wb+");
+			   	   	  ft1=fopen("E:\\temp1.txt","rb+");
 			          if(ft1==NULL)
 			            {
 			            	printf("Temp1 File not opened!!");
@@ -358,10 +358,10 @@ int main()
 								  fclose(fp1);
 								  remove("BITproject.txt");
 				 				  rename("temp1.txt","BITproject.txt");
-								  fp1=fopen("E:\\BITproject.txt","rb+");
+								  fp1=fopen("E:\\BITproject.txt","wb+");
 	                              if(fp1==NULL)
 	                                 {
-	                                    fp1=fopen("E:\\TrainerInfo.txt","wb+");
+	                                    fp1=fopen("E:\\BITproject.txt","rb+");
 	                                    if(fp1==NULL)
 	                                        {          
 	                                            printf("File1.1 not opened!!!");
@@ -369,11 +369,8 @@ int main()
 	     	                                    exit(0);
 												  
 										   }
-	                                 }
-							   }
-							printf("Press any key to continue..");
-							getchar();
-							system("cls");   
+	                                 }   
+						       }
 					    	break;
 					    }
 					  case 4:
@@ -424,17 +421,17 @@ int main()
 			         			printf("Id:");
 			         			scanf("%d",&dataT.id);
 			         			fflush(stdin);
-			         			printf("\nAge:");
+			         			printf("Age:");
 			         			scanf("%d",&dataT.age);
 			         			fflush(stdin);
-			         			printf("\nSalary(Rs.):");
+			         			printf("Salary(Rs.):");
 			         			scanf("%d",&dataT.salary);
 			         			fflush(stdin);
 			         			printf("Working hours:");
 			         			printf("\nStarting time:");
 			         			scanf("%d",&dataT.stime);
 			         			fflush(stdin);
-			         			printf("Ending time:");
+			         			printf("\nEnding time:");
 			         			scanf("%d",&dataT.etime);
 			         			fflush(stdin);
 			         			fwrite(&dataT,recsize2,1,fp2);
@@ -465,10 +462,10 @@ int main()
 							{
 								char tname[20];
 								int tid;
-								ft2=fopen("E:\\temp1.txt","rb+");
+								ft2=fopen("E:\\temp2.txt","wb+");
 								if(ft2==NULL)
 								  {
-								    ft2=fopen("E:\\temp1.txt","wb+");
+								    ft2=fopen("E:\\temp2.txt","rb+");
 								    if(ft2==NULL)
 									  {
 									  	 printf("Temp File not opened!!");
@@ -476,6 +473,7 @@ int main()
 								  	     exit(0);
 									  }	
 								  }
+								invalidtrainer:  
 								printf("\nEnter Trainer information:");
 								printf("\nName:");
 								gets(tname);
@@ -483,94 +481,118 @@ int main()
 								printf("\nID:");
 								scanf("%d",&tid);
 								fflush(stdin);
-								rewind(fp1);
+								rewind(fp2);
 								while(fread(&dataT,recsize2,1,fp2)>0)
 								  {
 								  	if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
 								  	  {
-								  	  		printf("\nName:");
-			         			            puts(dataT.name);
-			         			            printf("Id:%d",dataT.id);
-			         		   	            printf("\nAge:%d",dataT.age);
-			         			            printf("\nSalary(Rs.):%d",dataT.salary);
-			         			            printf("\nWorking hours(24hrs format):");
-			         			            printf("\nStarting time:%d",dataT.stime);
-			         			            printf("Ending time:%d",dataT.etime);
+								  	  	printf("\nName:");
+			         			        puts(dataT.name);
+			         			        printf("Id:%d",dataT.id);
+			         		   	        printf("\nAge:%d",dataT.age);
+			         			        printf("\nSalary(Rs.):%d",dataT.salary);
+			         			        printf("\nWorking hours(24hrs format):");
+			         	                printf("\nStarting time:%d",dataT.stime);
+			         			        printf("Ending time:%d",dataT.etime);
 								  	  }
-								  	int tdatachoice;    
-								  	printf("\nWhat do you want to do with this data:");
-								  	tdatawrong:
-									printf("\n1.Modify");
-									printf("\n2.Delete");
-									printf("\n3.Exit");
-									printf("\nEnter your choice:");
-									scanf("%d",&tdatachoice);
-									fflush(stdin);
-									system("cls");
-									switch(tdatachoice)
+								  	else
+								  	  {
+								  	  	printf("This Trainer doesnot exist.");
+								  	  	printf("Press any key to continue...");
+								  	  	getchar();
+								  	  	system("cls");
+								  	  	goto invalidtrainer;
+									  }
+							      }
+								int tdatachoice;    
+							  	printf("\nWhat do you want to do with this data:");
+							  	tdatawrong:
+								printf("\n1.Modify");
+								printf("\n2.Delete");
+								printf("\n3.Exit");
+								printf("\nEnter your choice:");
+								scanf("%d",&tdatachoice);
+								fflush(stdin);
+								system("cls");
+								switch(tdatachoice)
 									  {
 									  	case 1:
 									  		{
-									  			if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
-									  			  {
-									  			  	printf("\nEnter new details:");
-									  			  	printf("\nName:");
-			         			                    gets(dataT.name);
-			         			                    fflush(stdin);
-			         			                    printf("Id:");
-			         			                    scanf("%d",&dataT.id);
-			         			                    fflush(stdin);
-			         			                    printf("\nAge:");
-			         			                    scanf("%d",&dataT.age);
-			         			                    fflush(stdin);
-			         			                    printf("\nSalary(Rs.):");
-			         			                    scanf("%d",&dataT.salary);
-			         			                    fflush(stdin);
-			         			                    printf("Working hours:");
-			         			                    printf("\nStarting time:");
-			         			                    scanf("%d",&dataT.stime);
-			         			                    fflush(stdin);
-			         			                    printf("Ending time:");
-			         			                    scanf("%d",&dataT.etime);
-			         			                    fflush(stdin);
-			         			                    fseek(fp2,-recsize2,SEEK_CUR);
-			         			                    fwrite(&dataT,recsize2,1,fp2);
+									  			rewind(fp2);
+								                while(fread(&dataT,recsize2,1,fp2)>0)
+								                  {
+								                    if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
+									  			      {
+									  			  	    printf("\nEnter new details:");
+									  			  	    printf("\nName:");
+			         			                        gets(dataT.name);
+			         			                        fflush(stdin);
+			         			                        printf("Id:");
+			         			                        scanf("%d",&dataT.id);
+			         			                        fflush(stdin);
+			         			                        printf("\nAge:");
+			         			                        scanf("%d",&dataT.age);
+			         			                        fflush(stdin);
+			         			                        printf("\nSalary(Rs.):");
+			         			                        scanf("%d",&dataT.salary);
+			         			                        fflush(stdin);
+			         			                        printf("Working hours:");
+			         			                        printf("\nStarting time:");
+			         			                        scanf("%d",&dataT.stime);
+			         			                        fflush(stdin);
+			         			                        printf("Ending time:");
+			         			                        scanf("%d",&dataT.etime);
+			         			                        fflush(stdin);
+			         			                        fseek(fp2,-recsize2,SEEK_CUR);
+			         			                        fwrite(&dataT,recsize2,1,fp2);
+												      }
+												    break;  
 												  }
 												break;  
 										    }
 										case 2:
 										    {
-										    	if(strcmp(dataT.name,tname)!=0&&tid!=dataT.id)
-										    	  {
-										    	  	fwrite(&dataT,recsize2,1,ft2);
-												  }
-												fclose(ft2);
-												fclose(fp2);
-												remove("TrainerInfo.txt");
-												rename("temp1.txt","TrainerInfo.txt");
-												fp2=fopen("E:\\TrainerInfo.txt","rb+");
-	                                            if(fp2==NULL)
-	                                             {
-	                                             	fp2=fopen("E:\\TrainerInfo.txt","wb+");
+										    	rewind(fp2);
+								                while(fread(&dataT,recsize2,1,fp2)>0)
+								                  {
+								                    if(strcmp(dataT.name,tname)!=0&&tid!=dataT.id)
+										    	      {
+										    	  	    fwrite(&dataT,recsize2,1,ft2);
+												      }
+												    fclose(ft2);
+												    fclose(fp2);
+												    remove("TrainerInfo.txt");
+												    rename("temp2.txt","TrainerInfo.txt");
+												    fp2=fopen("E:\\TrainerInfo.txt","wb+");
 	                                                if(fp2==NULL)
-	                                                   {
-	                                                   	 printf("File2 not opened!!!");
-	     	                                             return 0;
-	     	                                             exit(0);
-													   }
-	                                             }
-												break;  	
+	                                                  {
+	                                             	    fp2=fopen("E:\\TrainerInfo.txt","rb+");
+	                                                    if(fp2==NULL)
+	                                                      {
+	                                                   	    printf("File2.1 not opened!!!");
+	     	                                                return 0;
+	     	                                                exit(0);
+													      }
+	                                                  }		
+												  }
+												printf("Press any key to continue..");
+							                    getchar();
+							                    system("cls");    
+												break;  
 										    }
 										case 3:
 										    {
-										    	goto top;
+										       printf("Press any key to continue..");
+							                   getchar();
+							                   system("cls");    
+											   break;  	
 											}
 										default:
 										printf("Wrong Entry!!");
 										goto tdatawrong;
-										system("cls");		    
-									  }    
-								  } 
+										system("cls");
+										break;		    
+									  }     
 								break;
 							}
 						case 3:
@@ -601,14 +623,14 @@ int main()
 								printf("Press any key to continue.");
 								getchar();
 								system("cls");
+								goto top;
 								break;
 							}	
 						default:
 						printf("Wrong choice!!");
 						goto Tchoicewrong;
 						break;	
-					 }
-				break;	 
+					 }	 
 			   }
 			   break;
 		     }
@@ -693,10 +715,10 @@ int main()
 					   }
 					  case 3:
 					   {
-					   	  ft3=fopen("E:\\temp2.txt","rb+");
+					   	  ft3=fopen("E:\\temp3.txt","rb+");
 				  		  if(ft3==NULL)
 							  {
-							  	ft3=fopen("E:\\temp2.txt","wb+");
+							  	ft3=fopen("E:\\temp3.txt","wb+");
 				  		        if(ft3==NULL)
 				  		          {
 				  		          	 printf("Temp File not opened!!");
@@ -796,11 +818,11 @@ int main()
 											fclose(ft3);
 											fclose(fp3);
 											remove("EquipmentInfo.txt");
-											rename("temp2.txt","EquipmentInfo.txt");
-											fp3=fopen("E:\\TrainerInfo.txt","rb+");
+											rename("temp3.txt","EquipmentInfo.txt");
+											fp3=fopen("E:\\EquipmentInfo.txt","rb+");
 	                                        if(fp3==NULL)
 	                                            {
-	                                            	fp3=fopen("E:\\TrainerInfo.txt","rb+");
+	                                            	fp3=fopen("E:\\EquipmentInfo.txt","wb+");
 	                                                if(fp3==NULL)
 	                                                  {
 	                                                  	printf("File3 not opened!!!");
