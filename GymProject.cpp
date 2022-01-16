@@ -25,16 +25,28 @@ struct trainer_info
 struct equipment_info
   {
   	char equip[30];
-  	int numbers,kg;
-  };   
+  	int numbers;
+  };
+struct workout_info
+  {
+  	char workout_focus[10];
+  	int wtime;
+  };
+struct workout_infoA
+  {
+  	char wname[25];
+  	int wid;
+  	struct workout_info wi[7];
+  };       
 int main()
    {
    	  int choice,choicemembership;
-	  long int recsize,recsize2,recsize3,tempsize1;  	
-   	  FILE *fp1,*fp2,*fp3,*ft1,*ft2,*ft3;
+	  long int recsize,recsize2,recsize3,recsize4,tempsize1;  	
+   	  FILE *fp1,*fp2,*fp3,*fp4,*ft1,*ft2,*ft3,*ft4;
    	  struct member_info dataM;
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
+   	  struct workout_infoA dataW;
    	  fp1=fopen("E:\\BITproject.txt","rb+");
    	  if(fp1==NULL)
    	     {
@@ -67,10 +79,22 @@ int main()
 	     	   return 0;
 	     	   exit(0);
 	         }
-	     }   
+	     }
+	  fp4=fopen("E:\\WorkoutInfo.txt","rb+");
+	  if(fp4==NULL)
+	     {
+	     	fp4=fopen("E:\\WorkoutInfo.txt","wb+");
+	        if(fp4==NULL)
+	         {
+	     	   printf("File4 not opened!!!");
+	     	   return 0;
+	     	   exit(0);
+	         }
+	     }       
 	  recsize=sizeof(dataM); 
 	  recsize2=sizeof(dataT);
-	  recsize3=sizeof(dataE); 
+	  recsize3=sizeof(dataE);
+	  recsize4=sizeof(dataW); 
 	  tempsize1=sizeof(dataE.numbers);
 	  while(1)
 	   { 
@@ -390,7 +414,130 @@ int main()
 			  }	
 		    case 4:
 		      {
-		      	printf("To be added");
+		      	char workoutsheet_name[25];
+		      	int wday=0,workoutsheet_id,workoutsheet_choice;
+		      	workoustsheetwrong:
+		      	printf("Enter name and id of the the person to find their workout sheet");
+		      	printf("\nName:");
+		      	gets(workoutsheet_name);
+		      	fflush(stdin);
+		      	printf("ID:");
+		      	scanf("%d",&workoutsheet_id);
+		        fflush(stdin);
+		      	rewind(fp1);
+			    while(fread(&dataM,recsize,1,fp1)>0)
+			      {
+			      	if(strcmp(workoutsheet_name,dataM.name)==0&&workoutsheet_id==dataM.id)
+			      	  {
+			      	  	dataW.wname[25]= workoutsheet_name[25];
+			      	  	dataW.wid= workoutsheet_id;
+			      	  	goto workoutsheetstart;
+			      	  	system("cls");
+					  }
+					else
+					  {
+					  	printf("This person is not on the membership list.");
+					  	printf("\nPlease Try Again.");
+					  	printf("\nPress any key to continue...");
+					  	getchar();
+					  	system("cls");
+					  }
+					break;    
+				  }
+				workoutsheetstart:
+				printf("\n");
+				printf("What do you want to do with the workout sheet:");
+				printf("\n1.Modify");
+				printf("\n2.Show");
+				printf("\nEnter your choice:");
+				scanf("%d",&workoutsheet_choice);
+				fflush(stdin);
+				switch(workoutsheet_choice)
+				  {
+				  	case 1:
+				  	  {
+				  	  	int daychoose;
+				  	  	printf("\n");
+				  	  	wdaywrong1:
+				  	  	printf("Day(7days):");
+				  	  	scanf("%d",&wday);
+				  	  	fflush(stdin);
+						daychoosewrong:  
+						printf("\nChoose what did he do on day %d",wday);
+						printf("\n1.Rest");
+						printf("\n2.Workout");
+						printf("\nChoice:");
+						scanf("%d",&daychoose);
+						fflush(stdin);
+						switch(daychoose)
+						   {
+						   	  case 1:
+						   	  	{
+						   	  		printf("Name:");
+						   	  		puts(dataW.wname);
+						   	  		printf("ID:%d",dataW.wid);
+						   	  		scanf("Rest",&dataW.wi[wday-1].workout_focus);
+						   	  		fwrite(&dataW,recsize4,1,fp4);
+						   	  		break;
+								}
+						   	  case 2:
+						   	  	{
+						   	  		printf("Name:");
+						   	  		puts(dataW.wname);
+						   	  		printf("ID:%d",dataW.wid);
+						   	  		printf("Workout Focus:");
+				  	  	            printf("\nFullBody");
+				  	  	            printf("\nAbs");
+				  	  	            printf("\nChest");
+				  	  	            printf("\nArms");
+				  	     	        printf("\nLegs");
+				  	  	            printf("\nBack");
+				  	  	            printf("Enter your workout focus:");
+				  	  	            scanf("%s",&dataW.wi[wday-1].workout_focus);
+				  	  	            printf("\nWorkout Time:");
+				  	  	            scanf("%d",&dataW.wi[wday-1].wtime);
+				  	  	            fwrite(&dataW,recsize4,1,fp4);
+				  	  	            break;
+							    }
+							  default: 
+							  printf("Wrong choice!!");
+					          goto daychoosewrong;
+					          system("cls");
+					          break; 
+						   }  
+				      }	
+				    case 2: 
+				      {
+				      	wdaywrong2:
+				     	printf("Day(7days):");
+				  	  	scanf("%d",&wday);
+				  	  	fflush(stdin);
+						rewind(fp4);
+				      	while(fread(&dataW,recsize4,1,fp4)>0)
+				      	  {
+				      	  	if(workoutsheet_id==dataW.wid)
+				      	  	  {
+				      	  	  	 if(dataW.wi[wday-1].workout_focus=="Rest")
+				      	  	  	   {
+				      	  	  	   	  printf("\nRest");
+								   }
+								 else  
+								   {
+								   	  printf("Workout focus:%s",dataW.wi[wday-1].workout_focus);
+				  	  	              printf("\nWorkout Time:%d",dataW.wi[wday-1].wtime);
+								   }
+							  }
+							break;  
+						  }
+					      
+				      	break;
+					  } 	 
+				    default: 
+				    printf("Wrong choice!!");
+		            goto datachoicewrong;
+		            system("cls");
+				    break; 
+				  }  
 		      	break;
 			  }
 			case 5:
@@ -660,12 +807,6 @@ int main()
 			 	   	  		printf("\nEquipment name:");
 			 	   	  		gets(dataE.equip);
 			 	   	  		fflush(stdin);
-			 	   	  		if(strcmp(dataE.equip,"Dumbbell")==0||strcmp(dataE.equip,"Barbell")==0)
-			 	   	  		  {
-			 	   	  		  	printf("\nWeight(kg):");
-			 	   	  		  	scanf("%d",&dataE.kg);
-			 	   	  		  	fflush(stdin);
-							  }
 							printf("\nNo. of ");
 							puts(dataE.equip);
 							scanf("%d",&dataE.numbers);
@@ -705,20 +846,16 @@ int main()
 	                          {
 	                          	printf("\nEquipemnt name:");
 	                          	puts(dataE.equip);
-	                          	if(strcmp(dataE.equip,"Dumbbell")==0||strcmp(dataE.equip,"Barbell")==0)
-	                          	  {
-	                          	  	printf("Kg:%d",dataE.kg);
-								  }
 								printf("Total no:%d",dataE.numbers);  
 							  }
 					   	    break;
 					   }
 					  case 3:
 					   {
-					   	  ft3=fopen("E:\\temp3.txt","rb+");
+					   	  ft3=fopen("E:\\temp3.txt","wb+");
 				  		  if(ft3==NULL)
 							  {
-							  	ft3=fopen("E:\\temp3.txt","wb+");
+							  	ft3=fopen("E:\\temp3.txt","rb+");
 				  		        if(ft3==NULL)
 				  		          {
 				  		          	 printf("Temp File not opened!!");
@@ -733,96 +870,94 @@ int main()
 					   	  printf("\nEquipment name:");
 					   	  gets(tequip);
 					   	  fflush(stdin);
-					   	  if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
-					   	    {
-					   	    	printf("Weight(kg):");
-					   	    	scanf("%d",&tweight);
-					   	    	fflush(stdin);
-						    }
 						  system("cls");  
-						  rewind(fp3);
-			              while(fread(&dataE,recsize3,1,fp3)>0)
-						    {
-						    	if(strcmp(dataE.equip,tequip)==0)
-						    	  {
-						    	  	if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
-					   	               {
-					   	               	   	printf("\nEquipment name:");
-						    	  	        puts(dataE.equip);
-						    	  	        printf("Weight(kg):%d",dataE.kg);
-						    	  	        printf("\nTotal no:%d",dataE.numbers);
-						               }
-						            else
-									   {
-									   	    printf("\nEquipment name:");
-						    	  	        puts(dataE.equip);
-						    	  	        printf("Total no:%d",dataE.numbers);
-									   }   
-								  }
-								int edatachoice;
-								MRwrong:
-								printf("\nWhat do you want to do with this data");
-								printf("\n1.Modify");
-								printf("\n2.Remove");
-								printf("\n3.Exit");
-								printf("\nEnter your choice:");
-								scanf("%d",&edatachoice);
-								fflush(stdin);
-								system("cls");
-								switch(edatachoice)
+						  int edatachoice;
+				  		  MRwrong:
+						  printf("\nWhat do you want to do with this data");
+						  printf("\n1.Show");
+						  printf("\n2.Modify");
+						  printf("\n3.Remove");
+						  printf("\n4.Exit");
+						  printf("\nEnter your choice:");
+						  scanf("%d",&edatachoice);
+						  fflush(stdin);
+						  system("cls");
+						  switch(edatachoice)
 								  {
 								  	 case 1:
 								  	 	{
-								  	 		char AR,a,r;
-								  	 		ARwrong:
-								  	 		printf("Add or Remove no. of ");
-								  	 		puts(dataE.equip);
-								  	 	    printf("\nPress (A to add/R to remove):");
-								  	 	    scanf("%s",&AR);
-								  	 	    if(AR=='a'||AR=='A')
-								  	 	      {
-								  	 	      	printf("Add(in no.):");
-								  	 	      	scanf("%d",&a);
-								  	 	      	fflush(stdin);
-								  	 	      	dataE.numbers=dataE.numbers+a;
-								  	 	      	fseek(fp3,-tempsize1,SEEK_CUR);
-								  	 	      	fwrite(&dataE,tempsize1,1,fp3);
-											  }
-											else if(AR=='r'||AR=='R')
-								  	 	      {
-								  	 	      	printf("Add(in no.):");
-								  	 	      	scanf("%d",&a);
-								  	 	      	fflush(stdin);
-								  	 	      	dataE.numbers=dataE.numbers-a;
-								  	 	      	fseek(fp3,-tempsize1,SEEK_CUR);
-								  	 	      	fwrite(&dataE,tempsize1,1,fp3);
-											  }  
+								  	 	    rewind(fp3);
+			                                while(fread(&dataE,recsize3,1,fp3)>0)
+						                    {
+						    	            if(strcmp(dataE.equip,tequip)==0)
+						    	            {
+									   	          printf("\nEquipment name:");
+						    	  	              puts(dataE.equip);
+						    	  	              printf("Total no:%d",dataE.numbers);  
+								            }
+								            break;
+							                }
 								  	 		break;
 									    }
-									  case 2:
+								  	 case 2:
+								  	 	{
+								  	 		char AR,a,r;
+								  	 		rewind (fp3);
+	                                        while(fread(&dataE,recsize3,1,fp3)>0)
+	                                          {
+	                                          	if(strcmp(dataE.equip,tequip)==0)
+	                                          	  {
+	                                       	  	            ARwrong:
+								  	 		                printf("Add or Remove no. of ");
+								  	                        puts(dataE.equip);
+								  	 	                    printf("\nPress (A to add/R to remove):");
+								  	 	                    scanf("%s",&AR);
+								  	 	                    if(AR=='a'||AR=='A')
+								  	 	                      {
+								  	 	      	                printf("Add(in no.):");
+								  	 	      	                scanf("%d",&a);
+								  	 	      	                fflush(stdin);
+								  	 	      	                dataE.numbers=dataE.numbers+a;
+								  	 	      	                fseek(fp3,-tempsize1,SEEK_CUR);
+								  	 	      	                fwrite(&dataE,tempsize1,1,fp3);
+											                  }
+											                else if(AR=='r'||AR=='R')
+								  	 	                      {
+								  	 	      	                printf("Remove(in no.):");
+								  	 	      	                scanf("%d",&r);
+								  	 	      	                fflush(stdin);
+								  	 	      	                dataE.numbers=dataE.numbers-r;
+								  	 	      	                fseek(fp3,-tempsize1,SEEK_CUR);
+								  	 	      	                fwrite(&dataE,tempsize1,1,fp3);
+											                  }
+													        else
+													          {
+													         	printf("Wrong Entry!!");
+													  	        goto ARwrong;
+													          } 
+												  }
+												break;  
+										      }
+								  	 		break;
+									    }
+									  case 3:
 									    {
-									        if(strcmp(tequip,"Dumbbell")==0||strcmp(tequip,"Barbell")==0)
-										    	{
-										    	  	if(strcmp(dataE.equip,tequip)!=0&&tweight!=dataE.kg)
-													  {
-													  	fwrite(&dataE,recsize3,1,ft3);
-													  }  	
-											    }
-											else
-											   {
+									       rewind(fp3);
+									       while(fread(&dataE,recsize3,1,fp3)>0)
+									       {
 											   	    if(strcmp(dataE.equip,tequip)!=0)
 											   	      {
 											   	      	fwrite(&dataE,recsize3,1,ft3);
 													  }
-											   }    
+										    }    
 											fclose(ft3);
 											fclose(fp3);
 											remove("EquipmentInfo.txt");
 											rename("temp3.txt","EquipmentInfo.txt");
-											fp3=fopen("E:\\EquipmentInfo.txt","rb+");
+											fp3=fopen("E:\\EquipmentInfo.txt","wb+");
 	                                        if(fp3==NULL)
 	                                            {
-	                                            	fp3=fopen("E:\\EquipmentInfo.txt","wb+");
+	                                            	fp3=fopen("E:\\EquipmentInfo.txt","rb+");
 	                                                if(fp3==NULL)
 	                                                  {
 	                                                  	printf("File3 not opened!!!");
@@ -832,7 +967,7 @@ int main()
 	                                            }
 	                                        break ;   
 									    }  
-									  case 3:
+									  case 4:
 									    {
 									    	printf("Press any key to continue..");
 								            getchar();
@@ -844,25 +979,24 @@ int main()
 									  printf("Press any key to continue..");
 									  getchar();
 									  goto MRwrong;
-									  break;	   
-								  }  
-								break;      
-							} 
-						  break;	
+									  break;
+							break;		  
 					   }
 					  case 4:
 					   {
 					   	  printf("Press any key to continue..");
 					      getchar();
 			              system("cls");
+			 			  goto top;			
 	 		              break;
 					   }
 					  default:
+					  printf("Wrong choice!!");
+				      printf("Press any key to continue..");
+					  getchar();	
 					  break;     
 				   }
-				  break; 
-			    }
-			   break; 
+			   }
 			 } 
 			case 7:
 			 {	
@@ -874,6 +1008,7 @@ int main()
 			goto flag;
 			break;	
 	    }
-     } 
-   	  return 0;
+     }
    }
+   return 0; 
+}
