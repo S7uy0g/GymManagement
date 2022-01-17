@@ -192,7 +192,7 @@ int main()
 			   if(YNmember=='Y'||YNmember=='y')
 			     {
 			     	goto add;
-				   }
+				 }
 			   else if(YNmember=='N'||YNmember=='n')
 			      {
 			      	break;
@@ -241,11 +241,12 @@ int main()
 			   int member_id,count=0;
 			   printf("\n");
 			   refind:
-			   printf("Enter Name and ID down bellow");
-			   printf("\nName:");
+			   printf("\n\t\t\t\t\t\t\t\t\t(|--|)Enter Name and ID down bellow(|--|)");
+			   printf("\n\t\t\t\t\t\t\t\t\t*****************************************");
+			   printf("\n\t\t\t\t\t\t\t\t\tName:");
 			   gets(member_name);
 			   fflush(stdin);
-			   printf("ID:");
+			   printf("\t\t\t\t\t\t\t\t\tID:");
 			   scanf("%d",&member_id);
 			   fflush(stdin);
 			   rewind(fp1);
@@ -258,17 +259,17 @@ int main()
                 }
                if(count==0)
 			     {
-			     	printf("Member not found.");
+			     	printf("\n\t\t\t\t\t\t\t\t\tMember not found.");
 			     	goto refind;
 				  } 
 			   int datachoice;
-			   printf("\nWhat do you want to do with this data:");
+			   printf("\n\t\t\t\t\t\t\t\t\tWhat do you want to do with this data:");
 			   datachoicewrong:
-			   printf("\n1.Show");
-	           printf("\n2.Modify");
-			   printf("\n3.Delete");
-		       printf("\n4.Exit");
-	           printf("\nInput your choice:");
+			   printf("\n\t\t\t\t\t\t\t\t\t1.Show");
+	           printf("\n\t\t\t\t\t\t\t\t\t2.Modify");
+			   printf("\n\t\t\t\t\t\t\t\t\t3.Delete");
+		       printf("\n\t\t\t\t\t\t\t\t\t4.Exit");
+	           printf("\n\t\t\t\t\t\t\t\t\tInput your choice:");
 	           scanf("%d",&datachoice);
 		       fflush(stdin);
 		       system("cls"); 
@@ -282,18 +283,18 @@ int main()
 	                             if(strcmp(dataM.name,member_name)==0&&dataM.id==member_id)
 	                                {
 	                                	printf("\n");
-	                                    printf("\nName:");
+	                                    printf("\n\t\t\t\t\t\t\t\t\tName:");
 	                                    puts(dataM.name);
-	                                    printf("Id:%d",dataM.id);
-			                            printf("\nAge:%d",dataM.age);
-			                            printf("\nHeight(in foot):%d",dataM.height);
-			                            printf("\nWeight(in kg:)%d",dataM.weight);
-			                            printf("\nMembership starting date:");
-			                            printf("\nYear:%d",dataM.time.year);
-			                            printf("\nMonth:%d",dataM.time.month);
-			                            printf("\nDay:%d",dataM.time.day); 
-	                                    printf("\nYour package will end after %d months prior to this date.",dataM.choicemembership);  
-	                                    printf("Press any key to continue..");
+	                                    printf("\n\t\t\t\t\t\t\t\t\tId:%d",dataM.id);
+			                            printf("\n\t\t\t\t\t\t\t\t\tAge:%d",dataM.age);
+			                            printf("\n\t\t\t\t\t\t\t\t\tHeight(in foot):%d",dataM.height);
+			                            printf("\n\t\t\t\t\t\t\t\t\tWeight(in kg:)%d",dataM.weight);
+			                            printf("\n\t\t\t\t\t\t\t\t\tMembership starting date:");
+			                            printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
+			                            printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month);
+			                            printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day); 
+	                                    printf("\n\t\t\t\t\t\t\t\t\tThe package will end after %d months prior to this date.",dataM.choicemembership);  
+	                                    printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 	                                    getchar();
 	                                    system("cls");
 								    }
@@ -307,62 +308,62 @@ int main()
 			       	  		   {
 			       	  		   	  if(strcmp(dataM.name,member_name)==0&&dataM.id==member_id)
 			       	  		   	    {
-			       	  		   	    	 printf("\nModify details down bellow:");
-			                             printf("\n");
+			       	  		   	    	 printf("\n\t\t\t\t\t\t\t\t\t(|--|)Modify details down bellow(|--|)");
+			                             printf("\n\t\t\t\t\t\t\t\t\t***************************************");
 			                             printf("Name:");
 			                             gets(dataM.name);
 			                             fflush(stdin);
-			                             printf("Id:");
+			                             printf("\t\t\t\t\t\t\t\t\tId:");
 			                             scanf("%d",&dataM.id);
 			                             fflush(stdin); 
-			                             printf("Age:");
+			                             printf("\t\t\t\t\t\t\t\t\tAge:");
 			                             scanf("%d",&dataM.age);
 			                             fflush(stdin);
-			                             printf("Height(in foot):");
+			                             printf("\t\t\t\t\t\t\t\t\tHeight(in foot):");
 			                             scanf("%d",&dataM.height);
 			                             fflush(stdin);
-			                             printf("Weight(in kg):");
+			                             printf("\t\t\t\t\t\t\t\t\tWeight(in kg):");
 			                             scanf("%d",&dataM.weight);
 			                             fflush(stdin);
-			                             printf("Membership starting date:");
-			                             printf("\nYear:");
+			                             printf("\t\t\t\t\t\t\t\t\tMembership starting date:");
+			                             printf("\n\t\t\t\t\t\t\t\t\tYear:");
 			                             scanf("%d",&dataM.time.year);
 			                             fflush(stdin);
 			                             monthwrong2:
-			                             printf("Month:");
+			                             printf("\t\t\t\t\t\t\t\t\tMonth:");
 			                             scanf("%d",&dataM.time.month);
 			                             fflush(stdin);
 			                             if(dataM.time.month>12||dataM.time.month<1)
 			                                {
-			     	                            printf("Wrong Entry!!!!");
+			     	                            printf("\t\t\t\t\t\t\t\t\tWrong Entry!!!!");
 			     	                            printf("\n");
 			     	                            goto monthwrong2;
 				                            }	 
 			                             daywrong2: 
-			                             printf("Day:");
+			                             printf("\t\t\t\t\t\t\t\t\tDay:");
 			                             scanf("%d",&dataM.time.day);
 			                             fflush(stdin);
 			                             if(dataM.time.day>31||dataM.time.day<1)
 			                                {
-			     	                            printf("Wrong Entry!!");
+			     	                            printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
 			     	                            printf("\n");
 			     	                            goto daywrong2;
 			                                }
 			                             membershipwrong2:	  
-			                             printf("Choose a membership plan:");
-			                             printf("\n3months");
-			                             printf("\n6months");
-			                             printf("\n9months");
-			                             printf("\n12months");
-			                             printf("\nEnter the membership plan(months):");
+			                             printf("\n\t\t\t\t\t\t\t\t\tChoose a membership plan:");
+			                             printf("\n\t\t\t\t\t\t\t\t\t3months");
+			                             printf("\n\t\t\t\t\t\t\t\t\t6months");
+			                             printf("\n\t\t\t\t\t\t\t\t\t9months");
+			                             printf("\n\t\t\t\t\t\t\t\t\t12months");
+			                             printf("\n\t\t\t\t\t\t\t\t\tEnter the membership plan(months):");
 			                             scanf("%d",&dataM.choicemembership);
 			                             if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			                                {  
-	                                            printf("\nYour package will end after %dmonths prior to this date.",dataM.choicemembership);
+	                                            printf("\n\t\t\t\t\t\t\t\t\tYour package will end after %dmonths prior to this date.",dataM.choicemembership);
 			                                }
 			                             else
 			                                {
-			   	                                printf("This package doesnot exist!!");
+			   	                                printf("\n\t\t\t\t\t\t\t\t\tThis package doesnot exist!!");
 			   	                                goto membershipwrong;
 			                                }
 			                             fseek(fp1,-recsize,SEEK_CUR);  
@@ -378,7 +379,7 @@ int main()
 			   	   	        ft1=fopen("E:\\temp1.txt","wb+");
 			                if(ft1==NULL)
 			                    {
-			                	     printf("Temp1 File not opened!!");
+			                	     printf("\n\t\t\t\t\t\t\t\t\tTemp1 File not opened!!");
 						             exit(0);
    	     	                         return 0;
 		      	               }
@@ -397,7 +398,7 @@ int main()
 						    fp1=fopen("E:\\BITproject.txt","rb+");
 	                        if(fp1==NULL)
 	                           {
-							                printf("File1.1 not opened!!!");
+							                printf("\n\t\t\t\t\t\t\t\t\tFile1.1 not opened!!!");
 	     	                                exit(0);
    	     	                                return 0;					
 	                            } 	   
@@ -405,13 +406,13 @@ int main()
 					    }
 					  case 4:
 					    {
-					    	printf("Press any key to continue..");
+					    	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							getchar();
 							system("cls"); 
 					    	break;
 					    }
 					  default:	
-					  printf("Wrong choice!!");
+					  printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
 					  goto datachoicewrong;
 					  system("cls");
 					  break;				  
@@ -425,11 +426,12 @@ int main()
 		      	int i=0;
 		      	int WSchoice,WSid;
 	 	  	  	NIwrong:
-		      	printf("\nEnter Name and ID:");
-		      	printf("\nName:");
+		      	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Enter Name and ID(|--|)");
+		      	printf("\n\t\t\t\t\t\t\t\t\t*****************************");
+		      	printf("\n\t\t\t\t\t\t\t\t\tName:");
 	 	  	  	gets(WSname);
 		      	fflush(stdin);
-		      	printf("ID:");
+		      	printf("\n\t\t\t\t\t\t\t\t\tID:");
 		      	scanf("%d",&WSid);
 		      	fflush(stdin);
 		      	rewind(fp1);
@@ -443,8 +445,8 @@ int main()
 					}
 				if(wcount==0)
 				   {
-						printf("\nMember Not Found");
-				      	printf("\nPress any key to continue.");
+						printf("\n\t\t\t\t\t\t\t\t\tMember Not Found");
+				      	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");
 				      	getchar();
 				      	system("cls");
 					  	goto NIwrong;
@@ -452,12 +454,12 @@ int main()
 		      	while(1)
 		      	 {
 		      	 	WSchoicewrong:
-		      	 	printf("Workout Sheet Info:");
-					printf("\n");   	
-		      	 	printf("\n1.Modify Workoutsheet");
-		      	 	printf("\n2.Show Workoutsheet");
-		      	 	printf("\n3.Exit");
-		      	 	printf("\nChoice:");
+		      	 	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Workout Sheet Info(|--|)");
+					printf("\n\t\t\t\t\t\t\t\t\t******************************");   	
+		      	 	printf("\n\t\t\t\t\t\t\t\t\t1.Modify Workoutsheet");
+		      	 	printf("\n\t\t\t\t\t\t\t\t\t2.Show Workoutsheet");
+		      	 	printf("\n\t\t\t\t\t\t\t\t\t3.Exit");
+		      	 	printf("\n\t\t\t\t\t\t\t\t\tChoice:");
 		      	 	scanf("%d",&WSchoice);
 		      	 	fflush(stdin);
 		      	 	system("cls");
@@ -466,22 +468,22 @@ int main()
 		      	 	  	case 1:
 		      	 	  	  {
 							WScontinue:
-							printf("Enter your id:"); 
+							printf("\n\t\t\t\t\t\t\t\t\tEnter your id:"); 
 							scanf("%d",&dataW.wid);
 							fflush(stdin);
-							printf("Enter the workout details of 7days");
+							printf("\n\t\t\t\t\t\t\t\t\tEnter the workout details of 7days");
 							for(i=0;i<7;i++)
 							  {
-							  	printf("\nWorkout Focus");
-							  	printf("\n1.FullBody");
-							  	printf("\n2.Arms");
-							  	printf("\n3.Abs");
-							  	printf("\n4.Legs");
-							  	printf("\n5.Rest");
-							  	printf("\nFocus(Input in words):");
+							  	printf("\n\t\t\t\t\t\t\t\t\tWorkout Focus");
+							  	printf("\n\t\t\t\t\t\t\t\t\t1.FullBody");
+							  	printf("\n\t\t\t\t\t\t\t\t\t2.Arms");
+							  	printf("\n\t\t\t\t\t\t\t\t\t3.Abs");
+							  	printf("\n\t\t\t\t\t\t\t\t\t4.Legs");
+							  	printf("\n\t\t\t\t\t\t\t\t\t5.Rest");
+							  	printf("\n\t\t\t\t\t\t\t\t\tFocus(Input in words):");
 							  	scanf("%s",&dataW.wi[i].workout_focus);
 							  	fflush(stdin);
-								printf("Workout Time(hrs spent):");
+								printf("\n\t\t\t\t\t\t\t\t\tWorkout Time(hrs spent):");
 								scanf("%d",&dataW.wi[i].wtime);
 								fflush(stdin);
 								system("cls");  
@@ -491,7 +493,7 @@ int main()
 					      }
 					    case 2:
 						  {
-						  	printf("Enter ID:");
+						  	printf("\n\t\t\t\t\t\t\t\t\tEnter ID:");
 						  	scanf("%d",&WSid);
 						  	fflush(stdin);
 						  	rewind(fp4);
@@ -499,16 +501,16 @@ int main()
 						  	  {
 						  	  	if(WSid==dataW.wid)
 						  	  	  {
-						  	  	  	printf("\nTrainer ID:%d",dataW.wid);
-						  	  	  	printf("\nWorkout Details");
+						  	  	  	printf("\n\t\t\t\t\t\t\t\t\tTrainer ID:%d",dataW.wid);
+						  	  	  	printf("\n\t\t\t\t\t\t\t\t\tWorkout Details");
 						  	  	  	for(i=0;i<7;i++)
 						  	  	  	  {
-						  	  	  	    printf("\nWorkout Focus:%s",dataW.wi[i].workout_focus);
+						  	  	  	    printf("\n\t\t\t\t\t\t\t\t\tWorkout Focus:%s",dataW.wi[i].workout_focus);
 						  	  	  	    if(dataW.wi[i].workout_focus=="Rest")
 						  	  	  	       {
 						  	  	  	       	  break;
 											}
-						  	  	  	    printf("\nWorkout Time(hrs spent):%d",dataW.wi[i].wtime);
+						  	  	  	    printf("\n\t\t\t\t\t\t\t\t\tWorkout Time(hrs spent):%d",dataW.wi[i].wtime);
 						  	  	      }
 								  }
 							  }
@@ -520,7 +522,7 @@ int main()
 							break;
 						  }  
 						default:  
-						printf("Wrong choice!!");
+						printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
 					    goto WSchoicewrong;
 					    system("cls");
 					    break;	  
@@ -534,12 +536,13 @@ int main()
 			   while(1)
 			   {
 			   	   Tchoicewrong:
-			   	   printf("\n");
-			       printf("1.Add Trainer");
-			       printf("\n2.Find a Trainer");
-			       printf("\n3.List Trainers");
-			       printf("\n4.Exit");
-			       printf("\nEnter your choice.");
+			   	   printf("\n\t\t\t\t\t\t\t\t\t(|--|)Trainer Tnformation(|--|)");
+			   	   printf("\n\t\t\t\t\t\t\t\t\t*******************************");
+			       printf("\n\t\t\t\t\t\t\t\t\t1.Add Trainer");
+			       printf("\n\t\t\t\t\t\t\t\t\t2.Find a Trainer");
+			       printf("\n\t\t\t\t\t\t\t\t\t3.List Trainers");
+			       printf("\n\t\t\t\t\t\t\t\t\t4.Exit");
+			       printf("\n\t\t\t\t\t\t\t\t\tEnter your choice.");
 			       scanf("%d",&choicetrainer);
 			       fflush(stdin);
 			       system("cls");
@@ -549,30 +552,31 @@ int main()
 			         		{
 			         			addtrainer:
 			         			printf("\n");
-			         			printf("Enter Trainer Details:");
-			         			printf("\nName:");
+			         			printf("\n\t\t\t\t\t\t\t\t\tEnter Trainer Details:");
+			         			printf("\n\t\t\t\t\t\t\t\t\t**********************");
+			         			printf("\n\t\t\t\t\t\t\t\t\tName:");
 			         			gets(dataT.name);
 			         			fflush(stdin);
-			         			printf("Id:");
+			         			printf("\t\t\t\t\t\t\t\t\tId:");
 			         			scanf("%d",&dataT.id);
 			         			fflush(stdin);
-			         			printf("Age:");
+			         			printf("\t\t\t\t\t\t\t\t\tAge:");
 			         			scanf("%d",&dataT.age);
 			         			fflush(stdin);
-			         			printf("Salary(Rs.):");
+			         			printf("\t\t\t\t\t\t\t\t\tSalary(Rs.):");
 			         			scanf("%d",&dataT.salary);
 			         			fflush(stdin);
-			         			printf("Working hours:");
-			         			printf("\nStarting time:");
+			         			printf("\t\t\t\t\t\t\t\t\tWorking hours:");
+			         			printf("\n\t\t\t\t\t\t\t\t\tStarting time:");
 			         			scanf("%d",&dataT.stime);
 			         			fflush(stdin);
-			         			printf("\nEnding time:");
+			         			printf("\t\t\t\t\t\t\t\t\tEnding time:");
 			         			scanf("%d",&dataT.etime);
 			         			fflush(stdin);
 			         			fwrite(&dataT,recsize2,1,fp2);
 			         			char YNtrainer;
 			                    YNtrainerwrong:
-			                    printf("\nDo you want to add another member(input Y/N):");
+			                    printf("\t\t\t\t\t\t\t\t\tDo you want to add another member(input Y/N):");
 			                    scanf("%s",&YNtrainer);
 			                    fflush(stdin);
 			                    system("cls");
@@ -586,8 +590,8 @@ int main()
 					               }
 				                else
 				                   {
-				  	                  printf("Wrong Entry!!");
-				  	                  printf("Press any key to continue.");
+				  	                  printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
+				  	                  printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");
 				  	                  getchar();
 				  	                  system("cls");
 				  	                  goto YNtrainerwrong;
@@ -595,14 +599,16 @@ int main()
 							}
 						case 2:
 							{
+								int tcount=0;
 								char tname[20];
 								int tid;
 								invalidtrainer:  
-								printf("\nEnter Trainer information:");
-								printf("\nName:");
+								printf("\n\t\t\t\t\t\t\t\t\tEnter Trainer information");
+								printf("\n\t\t\t\t\t\t\t\t\t*************************");
+								printf("\n\t\t\t\t\t\t\t\t\tName:");
 								gets(tname);
 								fflush(stdin);
-								printf("\nID:");
+								printf("\t\t\t\t\t\t\t\t\tID:");
 								scanf("%d",&tid);
 								fflush(stdin);
 								rewind(fp2);
@@ -610,32 +616,32 @@ int main()
 								  {
 								  	if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
 								  	  {
-								  	  	printf("\nName:");
+								  	  	printf("\n\t\t\t\t\t\t\t\t\tName:");
 			         			        puts(dataT.name);
-			         			        printf("Id:%d",dataT.id);
-			         		   	        printf("\nAge:%d",dataT.age);
-			         			        printf("\nSalary(Rs.):%d",dataT.salary);
-			         			        printf("\nWorking hours(24hrs format):");
-			         	                printf("\nStarting time:%d",dataT.stime);
-			         			        printf("Ending time:%d",dataT.etime);
-			         			        break;
+			         			        printf("\t\t\t\t\t\t\t\t\tId:%d",dataT.id);
+			         		   	        printf("\n\t\t\t\t\t\t\t\t\tAge:%d",dataT.age);
+			         			        printf("\n\t\t\t\t\t\t\t\t\tSalary(Rs.):%d",dataT.salary);
+			         			        printf("\n\t\t\t\t\t\t\t\t\tWorking hours(24hrs format):");
+			         	                printf("\n\t\t\t\t\t\t\t\t\tStarting time:%d",dataT.stime);
+			         			        printf("\n\t\t\t\t\t\t\t\t\tEnding time:%d",dataT.etime);
+			         			        tcount++;
 								  	  }
-								  	else
-								  	  {
-								  	  	printf("This Trainer doesnot exist.");
-								  	  	printf("Press any key to continue...");
-								  	  	getchar();
-								  	  	system("cls");
-								  	  	goto invalidtrainer;
-									  }
 							      }
+							    if(tcount==0)
+								  {
+								  	printf("\n\t\t\t\t\t\t\t\t\tTrainer not found!!");
+								  	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue");
+								  	getchar();
+								  	system("cls");
+								  	goto invalidtrainer;
+								  }  
 								int tdatachoice;    
-							  	printf("\nWhat do you want to do with this data:");
+							  	printf("\n\t\t\t\t\t\t\t\t\tWhat do you want to do with this data:");
 							  	tdatawrong:
-								printf("\n1.Modify");
-								printf("\n2.Delete");
-								printf("\n3.Exit");
-								printf("\nEnter your choice:");
+								printf("\n\t\t\t\t\t\t\t\t\t1.Modify");
+								printf("\n\t\t\t\t\t\t\t\t\t2.Delete");
+								printf("\n\t\t\t\t\t\t\t\t\t3.Exit");
+								printf("\n\t\t\t\t\t\t\t\t\tEnter your choice:");
 								scanf("%d",&tdatachoice);
 								fflush(stdin);
 								system("cls");
@@ -648,24 +654,25 @@ int main()
 								                  {
 								                    if(strcmp(dataT.name,tname)==0&&tid==dataT.id)
 									  			      {
-									  			  	    printf("\nEnter new details:");
-									  			  	    printf("\nName:");
+									  			  	    printf("\n\t\t\t\t\t\t\t\t\tEnter new details:");
+									  			  	    printf("\n\t\t\t\t\t\t\t\t\t******************");
+									  			  	    printf("\n\t\t\t\t\t\t\t\t\tName:");
 			         			                        gets(dataT.name);
 			         			                        fflush(stdin);
-			         			                        printf("Id:");
+			         			                        printf("\t\t\t\t\t\t\t\t\tId:");
 			         			                        scanf("%d",&dataT.id);
 			         			                        fflush(stdin);
-			         			                        printf("Age:");
+			         			                        printf("\t\t\t\t\t\t\t\t\tAge:");
 			         			                        scanf("%d",&dataT.age);
 			         			                        fflush(stdin);
-			         			                        printf("Salary(Rs.):");
+			         			                        printf("\t\t\t\t\t\t\t\t\tSalary(Rs.):");
 			         			                        scanf("%d",&dataT.salary);
 			         			                        fflush(stdin);
-			         			                        printf("Working hours:");
-			         			                        printf("\nStarting time:");
+			         			                        printf("\t\t\t\t\t\t\t\t\tWorking hours:");
+			         			                        printf("\n\t\t\t\t\t\t\t\t\tStarting time:");
 			         			                        scanf("%d",&dataT.stime);
 			         			                        fflush(stdin);
-			         			                        printf("Ending time:");
+			         			                        printf("\n\t\t\t\t\t\t\t\t\tEnding time:");
 			         			                        scanf("%d",&dataT.etime);
 			         			                        fflush(stdin);
 			         			                        fseek(fp2,-recsize2,SEEK_CUR);
@@ -699,24 +706,24 @@ int main()
 	                                             	    fp2=fopen("E:\\TrainerInfo.txt","rb+");
 	                                                    if(fp2==NULL)
 	                                                      {
-	                                                   	    printf("File2.1 not opened!!!");
+	                                                   	    printf("\n\t\t\t\t\t\t\t\t\tFile2.1 not opened!!!");
 	     	                                                exit(0);
    	     	                                                return 0;
 													      }	
-												printf("Press any key to continue..");
+												printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							                    getchar();
 							                    system("cls");    
 												break;  
 										    }
 										case 3:
 										    {
-										       printf("Press any key to continue..");
+										       printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							                   getchar();
 							                   system("cls");    
 											   break;  	
 											}
 										default:
-										printf("Wrong Entry!!");
+										printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
 										goto tdatawrong;
 										system("cls");
 										break;		    
@@ -725,37 +732,37 @@ int main()
 							}
 						case 3:
 							{
-								printf("\nList of all Trainers");
-								printf("\n");
+								printf("\n\t\t\t\t\t\t\t\t\tList of all Trainers");
+								printf("\n\t\t\t\t\t\t\t\t\t********************");
    	    	                    rewind (fp2);
 	                            while(fread(&dataT,recsize2,1,fp2)>0)
 	                                { 
 	                                  
 	                                  printf("\n");
-	                                  printf("\nName:");
+	                                  printf("\n\t\t\t\t\t\t\t\t\tName:");
 			        		          puts(dataT.name);
-			         	              printf("Id:%d",dataT.id);
-			         		   	      printf("\nAge:%d",dataT.age);
-			        		          printf("\nSalary(Rs.):%d",dataT.salary);
-			         	              printf("\nWorking hours(24hrs format):");
-			         			      printf("\nStarting time:%d",dataT.stime);
-			         			      printf("\nEnding time:%d",dataT.etime);
+			         	              printf("\t\t\t\t\t\t\t\t\tId:%d",dataT.id);
+			         		   	      printf("\n\t\t\t\t\t\t\t\t\tAge:%d",dataT.age);
+			        		          printf("\n\t\t\t\t\t\t\t\t\tSalary(Rs.):%d",dataT.salary);
+			         	              printf("\n\t\t\t\t\t\t\t\t\tWorking hours(24hrs format):");
+			         			      printf("\n\t\t\t\t\t\t\t\t\tStarting time:%d",dataT.stime);
+			         			      printf("\n\t\t\t\t\t\t\t\t\tEnding time:%d",dataT.etime);
 	                                } 
-			                    printf("\nPress any key to continue.");  
+			                    printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");  
 	                            getchar();
 			                    system("cls"); 
 								break;
 							}
 						case 4:
 							{
-								printf("Press any key to continue.");
+								printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");
 								getchar();
 								system("cls");
 								goto top;
 								break;
 							}	
 						default:
-						printf("Wrong choice!!");
+						printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
 						goto Tchoicewrong;
 						break;
 					 }	 
@@ -768,13 +775,13 @@ int main()
 			 	while(1)
 			 	{
 			 	printf("\n");	
-			 	printf("Equipment Management");
-			 	printf("\n");
-			 	printf("\n1.Add Equipment");
-			 	printf("\n2.List all Equipments");
-			 	printf("\n3.Find Equipment");
-			 	printf("\n4.Exit");
-			 	printf("\nEnter your choice:");
+			 	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Equipment Management(|--|)");
+			 	printf("\n\t\t\t\t\t\t\t\t\t********************************");
+			 	printf("\n\t\t\t\t\t\t\t\t\t1.Add Equipment");
+			 	printf("\n\t\t\t\t\t\t\t\t\t2.List all Equipments");
+			 	printf("\n\t\t\t\t\t\t\t\t\t3.Find Equipment");
+			 	printf("\n\t\t\t\t\t\t\t\t\t4.Exit");
+			 	printf("\n\t\t\t\t\t\t\t\t\tEnter your choice:");
 			 	scanf("%d",&equipchoice);
 			 	fflush(stdin);
 			 	system("cls");
@@ -783,19 +790,19 @@ int main()
 			 	   	  case 1:
 			 	   	  	{
 			 	   	  		addequip:
-			 	   	  		printf("\nAdd equipment information");
-			 	   	  		printf("\n");
-			 	   	  		printf("\nEquipment name:");
+			 	   	  		printf("\n\t\t\t\t\t\t\t\t\tAdd equipment information");
+			 	   	  		printf("\n\t\t\t\t\t\t\t\t\t*************************");
+			 	   	  		printf("\n\t\t\t\t\t\t\t\t\tEquipment name:");
 			 	   	  		gets(dataE.equip);
 			 	   	  		fflush(stdin);
-							printf("No. of ");
+							printf("\t\t\t\t\t\t\t\t\tNo. of ");
 							puts(dataE.equip);
 							scanf("%d",&dataE.numbers);
 							fflush(stdin);
 							fwrite(&dataE,recsize3,1,fp3);
 			         	    char YNequipment;
 			                YNequipwrong:
-			                printf("\nDo you want to add another equipment(input Y/N):");
+			                printf("\n\t\t\t\t\t\t\t\t\tDo you want to add another equipment(input Y/N):");
 			                scanf("%s",&YNequipment);
 			                fflush(stdin);
 			                system("cls");
@@ -809,8 +816,8 @@ int main()
    			                    }
 				            else
 				                {
-				  	              printf("\nWrong Entry!!");
-				                  printf("\nPress any key to continue.");
+				  	              printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
+				                  printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");
 			 	                  getchar();
 			  	                  system("cls");
 			  	                  goto YNequipwrong;
@@ -820,16 +827,16 @@ int main()
 				 	  case 2:
 					   {
 					   	    printf("\n");
-					   	    printf("List of all equipments");
-					   	    printf("\n");
+					   	    printf("\n\t\t\t\t\t\t\t\t\tList of all equipments");
+					   	    printf("\n\t\t\t\t\t\t\t\t\t**********************");
    	    	                rewind (fp3);
 	                        while(fread(&dataE,recsize3,1,fp3)>0)
 	                          {
-	                          	printf("\nEquipemnt name:");
+	                          	printf("\n\t\t\t\t\t\t\t\t\tEquipemnt name:");
 	                          	puts(dataE.equip);
-								printf("Total no:%d",dataE.numbers);  
+								printf("\n\t\t\t\t\t\t\t\t\tTotal no:%d",dataE.numbers);  
 							  }
-							printf("\nPress any key to continue..");
+							printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							getchar();
 							system("cls");  
 					   	    break;
@@ -838,20 +845,22 @@ int main()
 					   {
 					   	  char tequip[30];
 					   	  int tweight,aequip;
+					   	  edetwrong:
 					   	  printf("\n");
-					   	  printf("Enter Equipment information");
-					   	  printf("\nEquipment name:");
+					   	  printf("\n\t\t\t\t\t\t\t\t\tEnter Equipment information");
+				          printf("\n\t\t\t\t\t\t\t\t\t***************************");
+					   	  printf("\n\t\t\t\t\t\t\t\t\tEquipment name:");
 					   	  gets(tequip);
-					   	  fflush(stdin);
+					   	  fflush(stdin);   
 						  system("cls");  
 						  int edatachoice;
 				  		  MRwrong:
-						  printf("\nWhat do you want to do with this data");
-						  printf("\n1.Show");
-						  printf("\n2.Modify");
-						  printf("\n3.Remove");
-						  printf("\n4.Exit");
-						  printf("\nEnter your choice:");
+						  printf("\n\t\t\t\t\t\t\t\t\tWhat do you want to do with this data");
+						  printf("\n\t\t\t\t\t\t\t\t\t1.Show");
+						  printf("\n\t\t\t\t\t\t\t\t\t2.Modify");
+						  printf("\n\t\t\t\t\t\t\t\t\t3.Remove");
+						  printf("\n\t\t\t\t\t\t\t\t\t4.Exit");
+						  printf("\n\t\t\t\t\t\t\t\t\tEnter your choice:");
 						  scanf("%d",&edatachoice);
 						  fflush(stdin);
 						  system("cls");
@@ -864,9 +873,9 @@ int main()
 						                    {
 						    	            if(strcmp(dataE.equip,tequip)==0)
 						    	            {
-									   	          printf("\nEquipment name:");
+									   	          printf("\n\t\t\t\t\t\t\t\t\tEquipment name:");
 						    	  	              puts(dataE.equip);
-						    	  	              printf("Total no:%d",dataE.numbers);  
+						    	  	              printf("\t\t\t\t\t\t\t\t\tTotal no:%d",dataE.numbers);  
 								            }
 								            break;
 							                }
@@ -881,13 +890,13 @@ int main()
 	                                          	if(strcmp(dataE.equip,tequip)==0)
 	                                          	  {
 	                                       	  	            ARwrong:
-								  	 		                printf("Add or Remove no. of ");
+								  	 		                printf("\n\t\t\t\t\t\t\t\t\tAdd or Remove no. of ");
 								  	                        puts(dataE.equip);
-								  	 	                    printf("\nPress (A to add/R to remove):");
+								  	 	                    printf("\n\t\t\t\t\t\t\t\t\tPress (A to add/R to remove):");
 								  	 	                    scanf("%s",&AR);
 								  	 	                    if(AR=='a'||AR=='A')
 								  	 	                      {
-								  	 	      	                printf("Add(in no.):");
+								  	 	      	                printf("\n\t\t\t\t\t\t\t\t\tAdd(in no.):");
 								  	 	      	                scanf("%d",&a);
 								  	 	      	                fflush(stdin);
 								  	 	      	                dataE.numbers=dataE.numbers+a;
@@ -896,7 +905,7 @@ int main()
 											                  }
 											                else if(AR=='r'||AR=='R')
 								  	 	                      {
-								  	 	      	                printf("Remove(in no.):");
+								  	 	      	                printf("\n\t\t\t\t\t\t\t\t\tRemove(in no.):");
 								  	 	      	                scanf("%d",&r);
 								  	 	      	                fflush(stdin);
 								  	 	      	                dataE.numbers=dataE.numbers-r;
@@ -905,7 +914,7 @@ int main()
 											                  }
 													        else
 													          {
-													         	printf("Wrong Entry!!");
+													         	printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
 													  	        goto ARwrong;
 													          } 
 												  }
@@ -938,7 +947,7 @@ int main()
 	                                        fp3=fopen("E:\\EquipmentInfo.txt","rb+");
 	                                        if(fp3==NULL)
 	                                            {
-	                                                  	printf("File3 not opened!!!");
+	                                                  	printf("\n\t\t\t\t\t\t\t\t\tFile3 not opened!!!");
 	     	                                            exit(0);
    	     	                                            return 0;
 												}
@@ -946,14 +955,14 @@ int main()
 									    }  
 									  case 4:
 									    {
-									    	printf("Press any key to continue..");
+									    	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 								            getchar();
 								            system("cls");
 								            break;
 									    }
 									  default:
-									  printf("Wrong choice!!");
-									  printf("Press any key to continue..");
+									  printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
+									  printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 									  getchar();
 									  goto MRwrong;
 									  break;
@@ -961,15 +970,15 @@ int main()
 					   }
 					  case 4:
 					   {
-					   	  printf("Press any key to continue..");
+					   	  printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 					      getchar();
 			              system("cls");
 			 			  goto top;			
-				      break;
+				          break;
 					   }
 					  default:
-					  printf("Wrong choice!!");
-				      printf("Press any key to continue..");
+					  printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
+				      printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 					  getchar();	
 					  break;     
 				   }
@@ -981,7 +990,7 @@ int main()
    	     	   break;
 		     }
 			default:
-			printf("out of range");
+			printf("\n\t\t\t\t\t\t\t\t\tout of range");
 			goto flag;
 			break;
 	    }
