@@ -36,7 +36,8 @@ struct workout_infoA
   {
   	int wid;
   	struct workout_info wi[6];
-  };         
+  };
+void menu();      
 int main()
    {
    	  int choice,choicemembership;
@@ -98,7 +99,8 @@ int main()
 	  while(1)
 	   { 
 	    top:
-	    printf("\n\n\n\n\n\n\n\n");   
+	    menu();
+	    printf("\n\n\n\n");   
    	  	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Gym Managemnet(|--|)");
    	  	printf("\n\t\t\t\t\t\t\t\t\t**************************");
    	  	printf("\n");
@@ -276,6 +278,8 @@ int main()
 			   int member_id,count=0;
 			   printf("\n");
 			   refind:
+			   menu();	
+			   printf("\n\n");	
 			   printf("\n\t\t\t\t\t\t\t\t\t(|--|)Enter Name and ID down bellow(|--|)");
 			   printf("\n\t\t\t\t\t\t\t\t\t*****************************************");
 			   printf("\n\t\t\t\t\t\t\t\t\tName:");
@@ -499,6 +503,8 @@ int main()
 		      	int i=0;
 		      	int WSchoice,WSid;
 	 	  	  	NIwrong:
+	 	  	  	menu();	
+	 	  	  	printf("\n\n");	
 		      	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Enter Name and ID(|--|)");
 		      	printf("\n\t\t\t\t\t\t\t\t\t*****************************");
 		      	printf("\n\t\t\t\t\t\t\t\t\tName:");
@@ -527,6 +533,8 @@ int main()
 		      	while(1)
 		      	 {
 		      	 	WSchoicewrong:
+		      	 	menu();	
+		      	 	printf("\n\n");	
 		      	 	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Workout Sheet Info(|--|)");
 					printf("\n\t\t\t\t\t\t\t\t\t******************************");   	
 		      	 	printf("\n\t\t\t\t\t\t\t\t\t1.Modify Workoutsheet");
@@ -609,6 +617,7 @@ int main()
 			   while(1)
 			   {
 			   	   Tchoicewrong:
+			   	   menu();	
 			   	   printf("\n\t\t\t\t\t\t\t\t\t(|--|)Trainer Tnformation(|--|)");
 			   	   printf("\n\t\t\t\t\t\t\t\t\t*******************************");
 			       printf("\n\t\t\t\t\t\t\t\t\t1.Add Trainer");
@@ -847,7 +856,8 @@ int main()
 			 	int equipchoice;
 			 	while(1)
 			 	{
-			 	printf("\n");	
+			 	menu();	
+			 	printf("\n\n");	
 			 	printf("\n\t\t\t\t\t\t\t\t\t(|--|)Equipment Management(|--|)");
 			 	printf("\n\t\t\t\t\t\t\t\t\t********************************");
 			 	printf("\n\t\t\t\t\t\t\t\t\t1.Add Equipment");
@@ -919,7 +929,8 @@ int main()
 					   	  char tequip[30];
 					   	  int tweight,aequip;
 					   	  edetwrong:
-					   	  printf("\n");
+					   	  menu();	
+					   	  printf("\n\n");
 					   	  printf("\n\t\t\t\t\t\t\t\t\tEnter Equipment information");
 				          printf("\n\t\t\t\t\t\t\t\t\t***************************");
 					   	  printf("\n\t\t\t\t\t\t\t\t\tEquipment name:");
@@ -1075,3 +1086,14 @@ int main()
    fclose(fp4);
    return 0; 
 }
+void menu()
+  {
+        printf("\n\t\t\t\t\t\t\t      ________                                        ________");
+  	    printf("\n\t\t\t\t\t\t\t     |        |                                      |        |");
+  	    printf("\n\t\t\t\t\t\t\t   __||||||||||                                      ||||||||||__");
+  	    printf("\n\t\t\t\t\t\t\t _|  ||||||||||______________________________________||||||||||  |_");
+  	    printf("\n\t\t\t\t\t\t\t|_|  ||||||||||______________________________________||||||||||  |_|");
+  	    printf("\n\t\t\t\t\t\t\t  |__||||||||||                                      ||||||||||__|");
+  	    printf("\n\t\t\t\t\t\t\t     ||||||||||                                      ||||||||||");
+  	    printf("\n\t\t\t\t\t\t\t     |________|                                      |________|");
+  }
