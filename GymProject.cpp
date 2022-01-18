@@ -175,7 +175,25 @@ int main()
 			   scanf("%d",&dataM.choicemembership);
 			   if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			   { 
+			      int eyear,emonth,tempmonth;
+			      tempmonth=dataM.time.month+dataM.choicemembership;
 	              printf("\n\t\t\t\t\t\t\t\t\tYour package will end after %dmonths prior to this date.",dataM.choicemembership);
+	              if(tempmonth>12)
+	                 {
+	                 	eyear=dataM.time.year+1;
+	                 	emonth=tempmonth-12;
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	printf("\n\t\t\t\t\t\t\t\t\tYear:%d",eyear);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",emonth);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+					 }
+			      else
+				     {
+				     	printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month+dataM.choicemembership);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+				     }		 
 			   }
 			   else
 			   {
@@ -228,7 +246,25 @@ int main()
 			         printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
 			         printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month);
 			         printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day); 
-	                 printf("\n\t\t\t\t\t\t\t\t\tYour package will end after %dmonths prior to this date.",dataM.choicemembership);         
+	                 printf("\n\t\t\t\t\t\t\t\t\tYour package will end after %dmonths prior to this date.",dataM.choicemembership);
+					 int eyear1,emonth1,tempmonth1;
+			         tempmonth1=dataM.time.month+dataM.choicemembership;
+	                 if(tempmonth1>12)
+	                  {
+	                 	eyear1=dataM.time.year+1;
+	                 	emonth1=tempmonth1-12;
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	printf("\n\t\t\t\t\t\t\t\t\tYear:%d",eyear1);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",emonth1);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+					  }
+			         else
+				      {
+				     	printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month+dataM.choicemembership);
+	                 	printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+				      }		          
 	             } 
 			   printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");  
 	           getchar();
@@ -294,6 +330,24 @@ int main()
 			                            printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month);
 			                            printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day); 
 	                                    printf("\n\t\t\t\t\t\t\t\t\tThe package will end after %d months prior to this date.",dataM.choicemembership);  
+	                                    int eyear3,emonth3,tempmonth3;
+			                            tempmonth3=dataM.time.month+dataM.choicemembership;
+	                                    if(tempmonth3>12)
+	                                       {
+	                 	                      eyear3=dataM.time.year+1;
+	                 	                      emonth3=tempmonth3-12;
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tYear:%d",eyear3);
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",emonth3);
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+					                       }
+			                            else
+				                           {
+				     	                      printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month+dataM.choicemembership);
+	                 	                      printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+				                           }		 
 	                                    printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 	                                    getchar();
 	                                    system("cls");
@@ -310,7 +364,7 @@ int main()
 			       	  		   	    {
 			       	  		   	    	 printf("\n\t\t\t\t\t\t\t\t\t(|--|)Modify details down bellow(|--|)");
 			                             printf("\n\t\t\t\t\t\t\t\t\t***************************************");
-			                             printf("Name:");
+			                             printf("\n\t\t\t\t\t\t\t\t\tName:");
 			                             gets(dataM.name);
 			                             fflush(stdin);
 			                             printf("\t\t\t\t\t\t\t\t\tId:");
@@ -360,6 +414,24 @@ int main()
 			                             if(dataM.choicemembership==3||dataM.choicemembership==6||dataM.choicemembership==9||dataM.choicemembership==12)
 			                                {  
 	                                            printf("\n\t\t\t\t\t\t\t\t\tYour package will end after %dmonths prior to this date.",dataM.choicemembership);
+	                                            int eyear2,emonth2,tempmonth2;
+			                                    tempmonth2=dataM.time.month+dataM.choicemembership;
+	                                            if(tempmonth2>12)
+	                                              {
+	                 	                             eyear2=dataM.time.year+1;
+	                 	                             emonth2=tempmonth2-12;
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tYear:%d",eyear2);
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",emonth2);
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+					                              }
+			                                    else
+				                                  {
+				     	                             printf("\n\t\t\t\t\t\t\t\t\tMembership Ending Date:");
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tYear:%d",dataM.time.year);
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tMonth:%d",dataM.time.month+dataM.choicemembership);
+	                 	                             printf("\n\t\t\t\t\t\t\t\t\tDay:%d",dataM.time.day);
+				                                  }		 
 			                                }
 			                             else
 			                                {
@@ -368,6 +440,8 @@ int main()
 			                                }
 			                             fseek(fp1,-recsize,SEEK_CUR);  
 			                             fwrite(&dataM,recsize,1,fp1);
+			                             printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
+	                                     getchar();
 			                             system("cls");
 			                             break;
 									}
@@ -1001,5 +1075,4 @@ int main()
    fclose(fp3);
    fclose(fp4);
    return 0; 
-   closegraph();
 }
