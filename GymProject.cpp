@@ -1,7 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<graphics.h>
 struct membership_time
   {
   	int year,month,day;
