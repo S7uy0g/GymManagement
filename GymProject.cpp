@@ -47,6 +47,7 @@ int main()
    	  struct trainer_info dataT;
    	  struct equipment_info dataE;
    	  struct workout_infoA dataW;
+   	  //File opening process
    	  fp1=fopen("E:\\BITproject.txt","rb+");
    	  if(fp1==NULL)
    	     {
@@ -120,8 +121,8 @@ int main()
    	  	system("cls");
    	    switch(choice)
    	      {
-   	    	case 1:
-   	    	 {
+   	    	case 1://Adding a member
+   	    	 {	
 			   add: 	
 			   printf("\n\n\n\n\n\n\n\n"); 
    	    	   printf("\n\t\t\t\t\t\t\t\t\t(|--|)Add Member details down bellow(|--|)");
@@ -226,7 +227,7 @@ int main()
 			   system("cls");  			  	        
    	    	   break;
    	         }
-   	    	case 2:
+   	    	case 2://Listing all the members
    	    	 {
    	    	   int anynumber;
    	    	   printf("\n");
@@ -272,7 +273,7 @@ int main()
 			   system("cls"); 
 			   break;
 		     }
-			case 3:
+			case 3://Finding a gym member to either show,modify or delete the data
 			 {	
 			   char member_name[20],membermodify;
 			   int member_id,count=0;
@@ -314,7 +315,7 @@ int main()
 		       system("cls"); 
 		       switch(datachoice)
 			       {
-			       	  case 1:
+			       	  case 1://Showing the whole data based on the name and id given
 			       	  	{
 			       	  		rewind(fp1);
 			       	  		while(fread(&dataM,recsize,1,fp1)>0)
@@ -358,7 +359,7 @@ int main()
 	                           } 
 			       	  		break;
 					    }
-					  case 2:
+					  case 2://Editing the data 
 					    {
 					    	rewind(fp1);
 			       	  		while(fread(&dataM,recsize,1,fp1)==1)
@@ -451,7 +452,7 @@ int main()
 							   }
 					    	break;
 					    }
-					  case 3:
+					  case 3://Deleting the data
 					    {
 			   	   	        ft1=fopen("E:\\temp1.txt","wb+");
 			                if(ft1==NULL)
@@ -478,10 +479,36 @@ int main()
 							                printf("\n\t\t\t\t\t\t\t\t\tFile1.1 not opened!!!");
 	     	                                exit(0);
    	     	                                return 0;					
-	                            } 	   
+	                            }
+							ft4=fopen("E:\\Wtemp.txt","wb+");
+			                if(ft4==NULL)
+			                    {
+			                	     printf("\n\t\t\t\t\t\t\t\t\tWtemp File not opened!!");
+						             exit(0);
+   	     	                         return 0;
+		      	               }
+					    	rewind(fp4);
+			       	  		while(fread(&dataM,recsize,1,fp1)==1)
+			       	  		   {
+			       	  		   	  if(strcmp(dataM.name,member_name)!=0&&dataM.id!=member_id)
+									 {
+							    	  	fwrite(&dataM,recsize,1,ft1);
+								     }   
+							    }
+							fclose(fp4);    
+						    fclose(ft4);
+				  		    remove("E:\\WorkoutInfo.txt");
+				 		    rename("E:\\Wtemp1.txt","E:\\WorkoutInfo.txt");  
+						    fp4=fopen("E:\\WorkoutInfo.txt","rb+");
+	                        if(fp4==NULL)
+	                           {
+							                printf("\n\t\t\t\t\t\t\t\t\tFile4.1 not opened!!!");
+	     	                                exit(0);
+   	     	                                return 0;					
+	                            } 	   	 	   
 					    	break;
 					    }
-					  case 4:
+					  case 4://Exiting the condition
 					    {
 					    	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							getchar();
@@ -496,7 +523,7 @@ int main()
 				   }
 		 	   break;  
 			  }	
-		    case 4:
+		    case 4://Finding a workout sheet of a member
 		      {
 		      	int wcount=0;
 		      	char WSname[25];
@@ -546,7 +573,7 @@ int main()
 		      	 	system("cls");
 		      	 	switch(WSchoice)
 		      	 	  {
-		      	 	  	case 1:
+		      	 	  	case 1://Adding Workout information of the member in the workoutsheet
 		      	 	  	  {
 							WScontinue:
 							printf("\n\t\t\t\t\t\t\t\t\tEnter your id:"); 
@@ -572,7 +599,7 @@ int main()
 							fwrite(&dataW,recsize4,1,fp4);     
 		      	 	  	  	break;
 					      }
-					    case 2:
+					    case 2://Showing the workout sheet of each week
 						  {
 						  	printf("\n\t\t\t\t\t\t\t\t\tEnter ID:");
 						  	scanf("%d",&WSid);
@@ -595,9 +622,12 @@ int main()
 						  	  	      }
 								  }
 							  }
+							printf("\nPress Any Key to Continue...");
+							getchar();
+							system("cls");  
 						  	break;
 						  }
-						case 3:
+						case 3://Exiting to the main menu
 						  {
 						  	goto top;
 							break;
@@ -611,7 +641,7 @@ int main()
 				 }
 			break;
 			  }
-			case 5:
+			case 5://Inputting trainer information 
 			 {	
 			   int choicetrainer;
 			   while(1)
@@ -630,7 +660,7 @@ int main()
 			       system("cls");
 			       switch(choicetrainer)
 			         {
-			         	case 1:
+			         	case 1://Adding a new trainer on the gym
 			         		{
 			         			addtrainer:
 			         			printf("\n");
@@ -679,7 +709,7 @@ int main()
 				  	                  goto YNtrainerwrong;
 							       }		
 							}
-						case 2:
+						case 2://Finding and editing the trainer information
 							{
 								int tcount=0;
 								char tname[20];
@@ -729,7 +759,7 @@ int main()
 								system("cls");
 								switch(tdatachoice)
 									  {
-									  	case 1:
+									  	case 1://Modifying the trainer info
 									  		{
 									  			rewind(fp2);
 								                while(fread(&dataT,recsize2,1,fp2)>0)
@@ -764,7 +794,7 @@ int main()
 												  }
 												break;  
 										    }
-										case 2:
+										case 2://Deleting the trainer info
 										    {
 										    	ft2=fopen("E:\\temp2.txt","wb+");
 								                if(ft2==NULL)
@@ -797,7 +827,7 @@ int main()
 							                    system("cls");    
 												break;  
 										    }
-										case 3:
+										case 3://Exiting to the main trainer menu
 										    {
 										       printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							                   getchar();
@@ -812,7 +842,7 @@ int main()
 									  }     
 								break;
 							}
-						case 3:
+						case 3://Listing all the working trainers on the gym
 							{
 								printf("\n\t\t\t\t\t\t\t\t\tList of all Trainers");
 								printf("\n\t\t\t\t\t\t\t\t\t********************");
@@ -835,7 +865,7 @@ int main()
 			                    system("cls"); 
 								break;
 							}
-						case 4:
+						case 4://Exiting to the main menu
 							{
 								printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue.");
 								getchar();
@@ -851,7 +881,7 @@ int main()
 			   }
 			   break;
 		     }
-		    case 6:
+		    case 6://Managing the equipment available in the gym
 			 {
 			 	int equipchoice;
 			 	while(1)
@@ -870,7 +900,7 @@ int main()
 			 	system("cls");
 			 	switch(equipchoice)
 			 	   {
-			 	   	  case 1:
+			 	   	  case 1://Adding a new equipment
 			 	   	  	{
 			 	   	  		addequip:
 			 	   	  		printf("\n\t\t\t\t\t\t\t\t\tAdd equipment information");
@@ -907,7 +937,7 @@ int main()
 						       }		
 							break;
 				 	    }
-				 	  case 2:
+				 	  case 2://List of all equipments
 					   {
 					   	    printf("\n");
 					   	    printf("\n\t\t\t\t\t\t\t\t\tList of all equipments");
@@ -924,7 +954,7 @@ int main()
 							system("cls");  
 					   	    break;
 					   }
-					  case 3:
+					  case 3://Finding and editing the equipment information
 					   {
 					   	  char tequip[30];
 					   	  int tweight,aequip;
@@ -950,7 +980,7 @@ int main()
 						  system("cls");
 						  switch(edatachoice)
 								  {
-								  	 case 1:
+								  	 case 1://Showing the equipment info
 								  	 	{
 								  	 	    rewind(fp3);
 			                                while(fread(&dataE,recsize3,1,fp3)>0)
@@ -965,7 +995,7 @@ int main()
 							                }
 								  	 		break;
 									    }
-								  	 case 2:
+								  	 case 2://Adding or removing the no. of equipment
 								  	 	{
 								  	 		char AR,a,r;
 								  	 		rewind (fp3);
@@ -1006,7 +1036,7 @@ int main()
 										      }
 								  	 		break;
 									    }
-									  case 3:
+									  case 3://Removing the equipment
 									    {
 									    	
 					   	                   ft3=fopen("E:\\temp3.txt","wb+");
@@ -1037,7 +1067,7 @@ int main()
 												}
 	                                        break ;   
 									    }  
-									  case 4:
+									  case 4://Exiting to the equipment menu
 									    {
 									    	printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 								            getchar();
@@ -1052,7 +1082,7 @@ int main()
 									  break;
 							break;
 					   }
-					  case 4:
+					  case 4://Exiting to the main menu
 					   {
 					   	  printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 					      getchar();
@@ -1068,7 +1098,7 @@ int main()
 				   }
 			   }
 			 } 
-			case 7:
+			case 7://Exiting from the program
 			 {	
 			   exit(0);
    	     	   break;
