@@ -498,7 +498,7 @@ int main()
 							fclose(fp4);    
 						    fclose(ft4);
 				  		    remove("E:\\WorkoutInfo.txt");
-				 		    rename("E:\\Wtemp1.txt","E:\\WorkoutInfo.txt");  
+				 		    rename("E:\\Wtemp.txt","E:\\WorkoutInfo.txt");  
 						    fp4=fopen("E:\\WorkoutInfo.txt","rb+");
 	                        if(fp4==NULL)
 	                           {
@@ -908,8 +908,7 @@ int main()
 			 	   	  		printf("\n\t\t\t\t\t\t\t\t\tEquipment name:");
 			 	   	  		gets(dataE.equip);
 			 	   	  		fflush(stdin);
-							printf("\t\t\t\t\t\t\t\t\tNo. of ");
-							puts(dataE.equip);
+							printf("\t\t\t\t\t\t\t\t\tNo. of %s:",&dataE.equip);
 							scanf("%d",&dataE.numbers);
 							fflush(stdin);
 							fwrite(&dataE,recsize3,1,fp3);
@@ -947,7 +946,8 @@ int main()
 	                          {
 	                          	printf("\n\t\t\t\t\t\t\t\t\tEquipemnt name:");
 	                          	puts(dataE.equip);
-								printf("\n\t\t\t\t\t\t\t\t\tTotal no:%d",dataE.numbers);  
+								printf("\t\t\t\t\t\t\t\t\tTotal no:%d",dataE.numbers);  
+								printf("\n\t\t\t\t\t\t\t\t\t**************************");
 							  }
 							printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 							getchar();
@@ -997,7 +997,8 @@ int main()
 									    }
 								  	 case 2://Adding or removing the no. of equipment
 								  	 	{
-								  	 		char AR,a,r;
+								  	 		char AR;
+											int a,r;
 								  	 		rewind (fp3);
 	                                        while(fread(&dataE,recsize3,1,fp3)>0)
 	                                          {
@@ -1008,6 +1009,7 @@ int main()
 								  	                        puts(dataE.equip);
 								  	 	                    printf("\n\t\t\t\t\t\t\t\t\tPress (A to add/R to remove):");
 								  	 	                    scanf("%s",&AR);
+								  	 	                    fflush(stdin);
 								  	 	                    if(AR=='a'||AR=='A')
 								  	 	                      {
 								  	 	      	                printf("\n\t\t\t\t\t\t\t\t\tAdd(in no.):");
@@ -1015,7 +1017,7 @@ int main()
 								  	 	      	                fflush(stdin);
 								  	 	      	                dataE.numbers=dataE.numbers+a;
 								  	 	      	                fseek(fp3,-tempsize1,SEEK_CUR);
-								  	 	      	                fwrite(&dataE,tempsize1,1,fp3);
+								  	 	      	                fwrite(&dataE.numbers,tempsize1,1,fp3);
 											                  }
 											                else if(AR=='r'||AR=='R')
 								  	 	                      {
@@ -1024,15 +1026,15 @@ int main()
 								  	 	      	                fflush(stdin);
 								  	 	      	                dataE.numbers=dataE.numbers-r;
 								  	 	      	                fseek(fp3,-tempsize1,SEEK_CUR);
-								  	 	      	                fwrite(&dataE,tempsize1,1,fp3);
+								  	 	      	                fwrite(&dataE.numbers,tempsize1,1,fp3);
 											                  }
 													        else
 													          {
 													         	printf("\n\t\t\t\t\t\t\t\t\tWrong Entry!!");
 													  	        goto ARwrong;
-													          } 
+													          }   
 												  }
-												break;  
+												break;   
 										      }
 								  	 		break;
 									    }
@@ -1094,12 +1096,14 @@ int main()
 					  printf("\n\t\t\t\t\t\t\t\t\tWrong choice!!");
 				      printf("\n\t\t\t\t\t\t\t\t\tPress any key to continue..");
 					  getchar();	
-					  break;     
+					  break;   
+					break;    
 				   }
 			   }
 			 } 
 			case 7://Exiting from the program
 			 {	
+			   
 			   exit(0);
    	     	   break;
 		     }
@@ -1126,4 +1130,4 @@ void menu()
   	    printf("\n\t\t\t\t\t\t\t  |__||||||||||                                      ||||||||||__|");
   	    printf("\n\t\t\t\t\t\t\t     ||||||||||                                      ||||||||||");
   	    printf("\n\t\t\t\t\t\t\t     |________|                                      |________|");
-  }
+  };
