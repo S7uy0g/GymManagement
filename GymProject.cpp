@@ -622,7 +622,7 @@ int main()
 						  	  	      }
 								  }
 							  }
-							printf("\nPress Any Key to Continue...");
+							printf("\n\t\t\t\t\t\t\t\t\tPress Any Key to Continue...");
 							getchar();
 							system("cls");  
 						  	break;
